@@ -99,6 +99,8 @@ tailwind.config = {
   @media(max-width:640px){ .masonry{column-count:1} }
   .masonry .tile{ break-inside:avoid; margin-bottom:1.25rem; overflow:hidden; position:relative; cursor:pointer; }
   .masonry .tile img{ transition:transform .9s cubic-bezier(.2,.8,.2,1); width:100%; display:block; }
+  .tile img{ transition:transform .9s cubic-bezier(.2,.8,.2,1); width:100%; display:block; object-fit:cover; aspect-ratio:4/5; }
+  @media(min-width:768px){ .tile img{ aspect-ratio:auto; height:var(--th); } }
   .masonry .tile:hover img{ transform:scale(1.08); }
   .masonry .tile::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg,transparent 55%,rgba(28,24,21,.5));
     opacity:0; transition:.5s; }
@@ -138,6 +140,10 @@ tailwind.config = {
 </style>
 </head>
 <body class="font-body antialiased">
+<script>
+if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
+window.scrollTo(0,0);
+</script>
 
 <div id="progress"></div>
 
@@ -256,7 +262,7 @@ tailwind.config = {
       <h2 class="font-display text-4xl md:text-5xl leading-tight mb-6">Trabajos selectos</h2>
       <p class="text-ink/60 font-light">Una muestra del cuidado, la técnica y la estética que definen cada creación.</p>
     </div>
-    <div class="masonry reveal" id="gallery-grid"></div>
+    <div class="grid grid-cols-2 md:masonry gap-3 md:gap-0 reveal" id="gallery-grid"></div>
   </div>
 </section>
 
@@ -443,15 +449,12 @@ const faqs = [
 const svc = document.getElementById('svc-grid');
 services.forEach((s,i)=>{
   svc.insertAdjacentHTML('beforeend', `
-    <div class="svc-card reveal group flex md:block items-start gap-5 border-b border-ink/10 md:border md:border-rosegold/15 bg-transparent md:bg-ivory py-7 md:py-8 px-1 md:px-8">
-      <div class="flex flex-col items-center gap-2 shrink-0 md:hidden w-10">
-        <span class="font-display text-xs text-copper/60">${String(i+1).padStart(2,'0')}</span>
-        <div class="svc-ic w-11 h-11 rounded-full bg-sand flex items-center justify-center text-copper"><i data-lucide="${s.icon}" class="w-5 h-5"></i></div>
-      </div>
+    <div class="svc-card reveal group flex md:block items-baseline md:items-start gap-4 border-b border-ink/10 md:border md:border-rosegold/15 bg-transparent md:bg-ivory py-4 md:py-8 px-1 md:px-8">
+      <span class="font-display text-xs text-copper/50 shrink-0 md:hidden">${String(i+1).padStart(2,'0')}</span>
       <div class="hidden md:flex svc-ic w-14 h-14 rounded-full bg-sand items-center justify-center mb-6 text-copper"><i data-lucide="${s.icon}" class="w-6 h-6"></i></div>
       <div>
-        <h3 class="font-display text-xl md:text-2xl mb-1.5 md:mb-3">${s.title}</h3>
-        <p class="text-ink/60 text-sm font-light leading-relaxed">${s.desc}</p>
+        <h3 class="font-display text-lg md:text-2xl mb-0.5 md:mb-3">${s.title}</h3>
+        <p class="text-ink/55 text-[.82rem] md:text-sm font-light leading-snug md:leading-relaxed">${s.desc}</p>
       </div>
     </div>`);
 });
@@ -461,7 +464,7 @@ gallery.forEach((id,i)=>{
   const h = [340,440,380,420,360,460,400,380,430][i%9];
   gal.insertAdjacentHTML('beforeend', `
     <div class="tile" onclick="openLB('${id}')">
-      <img src="${id}" style="height:${h}px;object-fit:cover" alt="Trabajo">
+      <img src="${id}" style="--th:${h}px" alt="Trabajo">
     </div>`);
 });
 
