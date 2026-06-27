@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-27T00:00:00.000Z",
+  "title": "Design System: Laura Zapién Studio",
+  "extensions": {
+    "colorMeta": {
+      "ivory": { "role": "neutral", "displayName": "Warm Ivory", "canonical": "oklch(97% 0.006 75)", "tonalRamp": ["oklch(15% 0.01 75)", "oklch(28% 0.012 75)", "oklch(42% 0.012 75)", "oklch(56% 0.012 75)", "oklch(70% 0.01 75)", "oklch(84% 0.008 75)", "oklch(92% 0.006 75)", "oklch(97% 0.006 75)"] },
+      "sand": { "role": "neutral", "displayName": "Sand", "canonical": "oklch(93% 0.018 70)", "tonalRamp": ["oklch(15% 0.02 70)", "oklch(28% 0.022 70)", "oklch(42% 0.022 70)", "oklch(56% 0.02 70)", "oklch(70% 0.02 70)", "oklch(84% 0.02 70)", "oklch(90% 0.018 70)", "oklch(93% 0.018 70)"] },
+      "rosegold": { "role": "primary", "displayName": "Rosegold", "canonical": "oklch(62% 0.09 18)", "tonalRamp": ["oklch(15% 0.04 18)", "oklch(28% 0.06 18)", "oklch(40% 0.08 18)", "oklch(50% 0.09 18)", "oklch(62% 0.09 18)", "oklch(74% 0.08 18)", "oklch(86% 0.05 18)", "oklch(95% 0.02 18)"] },
+      "copper": { "role": "secondary", "displayName": "Copper", "canonical": "oklch(56% 0.1 40)", "tonalRamp": ["oklch(15% 0.05 40)", "oklch(28% 0.07 40)", "oklch(40% 0.09 40)", "oklch(48% 0.1 40)", "oklch(56% 0.1 40)", "oklch(68% 0.08 40)", "oklch(82% 0.05 40)", "oklch(94% 0.02 40)"] },
+      "champagne": { "role": "tertiary", "displayName": "Champagne", "canonical": "oklch(82% 0.05 55)", "tonalRamp": ["oklch(20% 0.02 55)", "oklch(32% 0.03 55)", "oklch(46% 0.04 55)", "oklch(60% 0.05 55)", "oklch(72% 0.05 55)", "oklch(82% 0.05 55)", "oklch(90% 0.03 55)", "oklch(96% 0.015 55)"] },
+      "ink": { "role": "neutral", "displayName": "Warm Ink", "canonical": "oklch(18% 0.012 50)", "tonalRamp": ["oklch(10% 0.01 50)", "oklch(18% 0.012 50)", "oklch(28% 0.012 50)", "oklch(40% 0.012 50)", "oklch(54% 0.012 50)", "oklch(68% 0.01 50)", "oklch(82% 0.008 50)", "oklch(94% 0.005 50)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headlines and every section H2; mixes roman and italic-rosegold within one line for emphasis." },
+      "body": { "displayName": "Body", "purpose": "All paragraph copy; calm, low-contrast counterweight to Playfair Display." },
+      "label": { "displayName": "Eyebrow Label", "purpose": "Small uppercase tracked section labels and button text, always copper or ivory." }
+    },
+    "shadows": [
+      { "name": "card-hover-lift", "value": "0 28px 50px -28px rgba(176,106,74,.3)", "purpose": "Desktop services card hover only; never present at rest." },
+      { "name": "generic-lift", "value": "0 30px 60px -30px rgba(28,24,21,.35)", "purpose": "Testimonial / floating panel hover lift." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "cubic-bezier(.2,.8,.2,1)", "purpose": "Default easing for hovers, card lifts, slider drag." },
+      { "name": "duration-standard", "value": "0.5s", "purpose": "Default transition length for hover state changes." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ink-filled CTA with an uppercase tracked label; on hover a rosegold-to-copper gradient slides up from the bottom edge.",
+      "html": "<button class=\"ds-btn-primary\"><span>AGENDA TU CITA</span></button>",
+      "css": ".ds-btn-primary { position: relative; overflow: hidden; background: #1C1815; color: #FBF8F4; padding: 16px 36px; font-size: .72rem; letter-spacing: .28em; text-transform: uppercase; font-weight: 600; border: none; cursor: pointer; transition: color .45s; } .ds-btn-primary span { position: relative; z-index: 2; } .ds-btn-primary::before { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, #B76E79, #B06A4A); transform: translateY(101%); transition: transform .5s cubic-bezier(.2,.8,.2,1); } .ds-btn-primary:hover::before { transform: translateY(0); } .ds-btn-primary:focus-visible { outline: 2px solid #B76E79; outline-offset: 2px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Transparent button for use over photographic hero backgrounds.",
+      "html": "<button class=\"ds-btn-ghost\">Ver galería</button>",
+      "css": ".ds-btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(251,248,244,.6); padding: 16px 36px; font-size: .72rem; letter-spacing: .28em; text-transform: uppercase; font-weight: 600; cursor: pointer; transition: .45s; } .ds-btn-ghost:hover { background: rgba(251,248,244,.12); border-color: #fff; } .ds-btn-ghost:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }"
+    },
+    {
+      "name": "Service Row (mobile editorial list)",
+      "kind": "custom",
+      "refersTo": "svc-card",
+      "description": "Numbered list row replacing the boxed-card pattern on mobile: index number, title, description, thin bottom divider, no icon circle, no shadow.",
+      "html": "<div class=\"ds-svc-row\"><span class=\"ds-svc-num\">02</span><div><h3 class=\"ds-svc-title\">Balayage</h3><p class=\"ds-svc-desc\">Iluminaciones naturales con dimensión y movimiento.</p></div></div>",
+      "css": ".ds-svc-row { display: flex; align-items: baseline; gap: 1rem; border-bottom: 1px solid rgba(28,24,21,.1); padding: 1rem 0.25rem; } .ds-svc-num { font-family: 'Playfair Display', serif; font-size: .75rem; color: rgba(176,106,74,.5); flex-shrink: 0; } .ds-svc-title { font-family: 'Playfair Display', serif; font-size: 1.125rem; margin-bottom: .125rem; color: #1C1815; } .ds-svc-desc { color: rgba(28,24,21,.55); font-size: .82rem; font-weight: 300; line-height: 1.4; }"
+    },
+    {
+      "name": "Before/After Slider",
+      "kind": "custom",
+      "refersTo": "ba-wrap",
+      "description": "Draggable comparison slider: vertical white handle with a circular grip, the page's one embrace of tactile, content-driven interactivity.",
+      "html": "<div class=\"ds-ba-wrap\"><div class=\"ds-ba-handle\"><div class=\"ds-ba-grip\">↔</div></div></div>",
+      "css": ".ds-ba-wrap { position: relative; width: 240px; height: 160px; overflow: hidden; background: #E4D5C3; } .ds-ba-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: #fff; transform: translateX(-50%); } .ds-ba-grip { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 54px; height: 54px; border-radius: 9999px; background: rgba(255,255,255,.92); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,.25); color: #1C1815; cursor: grab; }"
+    },
+    {
+      "name": "Nav Link (underline)",
+      "kind": "nav",
+      "refersTo": "link-underline",
+      "description": "Manrope nav link that grows a rosegold underline left-to-right on hover.",
+      "html": "<a class=\"ds-nav-link\">Servicios</a>",
+      "css": ".ds-nav-link { position: relative; color: #1C1815; font-family: Manrope, sans-serif; text-decoration: none; } .ds-nav-link::after { content: ''; position: absolute; left: 0; bottom: -3px; height: 1px; width: 0; background: #B76E79; transition: width .4s; } .ds-nav-link:hover::after, .ds-nav-link:focus-visible::after { width: 100%; } .ds-nav-link:focus-visible { outline: 2px solid #B76E79; outline-offset: 4px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "El Atelier de Luz Cálida",
+    "overview": "The site reads like a boutique beauty atelier bathed in soft gold-hour light, not a software product. Every surface is a warm ivory or sand, every accent a muted rosegold or copper, every headline set in Playfair Display so the page feels hand-curated rather than templated. Density is generous: sections breathe with large vertical rhythm, and the page never rushes the visitor toward a CTA grid. This system explicitly rejects the SaaS-template register: no identical icon-in-circle card grids repeated past their useful count, no scroll-fade-in applied uniformly to every section just because GSAP is loaded, no stock-photo Instagram walls, no hero-metric blocks, no side-stripe borders or gradient text.",
+    "keyCharacteristics": [
+      "Warm ivory/sand backgrounds, never pure white or pure black",
+      "Playfair Display serif for all headlines, italic rosegold accents for emphasis words",
+      "Thin rosegold borders (≤1px, 10-15% opacity) instead of shadows as the default separator",
+      "Editorial list rhythm on mobile (numbered rows + dividers) instead of stacked boxed cards",
+      "Motion is occasional and purposeful, not a default applied to every section"
+    ],
+    "rules": [
+      { "name": "The Rare Accent Rule", "body": "Rosegold and copper are accents, not backgrounds. They never fill a surface larger than a thin border, icon, or short text run.", "section": "colors" },
+      { "name": "The Whisper Label Rule", "body": "Uppercase tracked labels are always small (0.72rem) and wide-tracked (0.32em); they introduce a section, never compete with the headline that follows.", "section": "typography" },
+      { "name": "The Hover-Only Shadow Rule", "body": "No element carries a shadow at rest. Shadows are a state response to hover/focus, copper-tinted, never neutral gray.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep all corners square except the fully-round elements (nav buttons, icon badges, slider grip).",
+      "Do use Playfair Display for every headline and Manrope for every paragraph.",
+      "Do treat rosegold/copper as accents on ≤10-15% of any given section's surface.",
+      "Do keep shadows hover-only.",
+      "Do use the editorial list pattern for repeated content on mobile.",
+      "Do animate only where it clarifies real content or signals state."
+    ],
+    "donts": [
+      "Don't add identical icon-in-circle card grids repeated past 3-4 items.",
+      "Don't apply a uniform scroll-fade-in to every section by default.",
+      "Don't use stock-photo grids like a generic Instagram wall.",
+      "Don't use gradient text, side-stripe borders, glassmorphism beyond the nav, or hero-metric blocks.",
+      "Don't let rosegold/copper become a background fill on anything larger than a thin border, icon, or short text run.",
+      "Don't mix in a second display typeface or a rounded-corner system."
+    ]
+  }
+}

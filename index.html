@@ -79,6 +79,11 @@ tailwind.config = {
   .svc-card{ transition:.5s cubic-bezier(.2,.8,.2,1); }
   .svc-card:hover .svc-ic{ background:var(--rosegold); color:#fff; transform:rotate(-6deg) scale(1.05); }
   .svc-ic{ transition:.5s cubic-bezier(.2,.8,.2,1); }
+  .svc-num{ display:inline-block; transition:color .4s cubic-bezier(.16,1,.3,1), transform .4s cubic-bezier(.16,1,.3,1); }
+  .svc-text{ transition:transform .4s cubic-bezier(.16,1,.3,1); }
+  .svc-card:hover .svc-num{ color:var(--copper); transform:translateX(2px); }
+  .svc-card:hover .svc-text{ transform:translateX(4px); }
+  @media(min-width:768px){ .svc-card:hover .svc-text{ transform:none; } }
   @media(min-width:768px){
     .svc-card:hover{ transform:translateY(-8px); border-color:rgba(183,110,121,.4); background:#fff; box-shadow:0 28px 50px -28px rgba(176,106,74,.3); }
   }
@@ -136,7 +141,21 @@ tailwind.config = {
   .link-underline::after{ content:''; position:absolute; left:0; bottom:-3px; height:1px; width:0; background:var(--rosegold); transition:width .4s; }
   .link-underline:hover::after{ width:100%; }
 
-  #lightbox{ background:rgba(20,17,15,.92); backdrop-filter:blur(8px); }
+  #lightbox{ background:rgba(20,17,15,.92); backdrop-filter:blur(8px); opacity:0; pointer-events:none; transition:opacity .35s cubic-bezier(.16,1,.3,1); }
+  #lightbox.is-open{ opacity:1; pointer-events:auto; }
+  #lightbox img{ transform:scale(.94); transition:transform .4s cubic-bezier(.16,1,.3,1); }
+  #lightbox.is-open img{ transform:scale(1); }
+
+  #cf-fields{ transition:opacity .4s cubic-bezier(.16,1,.3,1), transform .4s cubic-bezier(.16,1,.3,1); }
+  #cf-success{ transition:opacity .5s cubic-bezier(.16,1,.3,1); }
+  #cf-success i{ transform:scale(0); transition:transform .5s cubic-bezier(.34,1,.46,1) .15s; }
+  .cf-sent #cf-fields{ opacity:0; transform:translateY(-8px); pointer-events:none; }
+  .cf-sent #cf-success{ opacity:1; pointer-events:auto; }
+  .cf-sent #cf-success i{ transform:scale(1); }
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
+  }
 </style>
 </head>
 <body class="font-body antialiased">
@@ -262,7 +281,7 @@ window.scrollTo(0,0);
       <h2 class="font-display text-4xl md:text-5xl leading-tight mb-6">Trabajos selectos</h2>
       <p class="text-ink/60 font-light">Una muestra del cuidado, la técnica y la estética que definen cada creación.</p>
     </div>
-    <div class="grid grid-cols-2 md:masonry gap-3 md:gap-0 reveal" id="gallery-grid"></div>
+    <div class="grid grid-cols-2 md:masonry gap-3 md:gap-0" id="gallery-grid"></div>
   </div>
 </section>
 
@@ -356,8 +375,8 @@ window.scrollTo(0,0);
         </div>
       </div>
       <div class="reveal-r">
-        <div class="bg-ivory/[.04] border border-ivory/10 p-8 md:p-10 backdrop-blur">
-          <div class="space-y-6">
+        <div id="cf-card" class="bg-ivory/[.04] border border-ivory/10 p-8 md:p-10 backdrop-blur relative overflow-hidden">
+          <div id="cf-fields" class="space-y-6">
             <div>
               <label class="text-[.65rem] tracking-wides uppercase text-ivory/50 mb-2 block">Nombre</label>
               <input type="text" class="w-full bg-transparent border-b border-ivory/20 py-3 outline-none focus:border-rosegold transition-colors text-ivory placeholder-ivory/30" placeholder="Tu nombre completo">
@@ -374,7 +393,12 @@ window.scrollTo(0,0);
               <label class="text-[.65rem] tracking-wides uppercase text-ivory/50 mb-2 block">Mensaje</label>
               <textarea rows="3" class="w-full bg-transparent border-b border-ivory/20 py-3 outline-none focus:border-rosegold transition-colors text-ivory placeholder-ivory/30 resize-none" placeholder="Cuéntanos qué tienes en mente"></textarea>
             </div>
-            <button onclick="alert('Gracias. Laura se pondrá en contacto contigo muy pronto.')" class="w-full bg-ivory text-ink py-4 text-[.72rem] tracking-wides uppercase hover:bg-champagne transition-colors">Enviar solicitud</button>
+            <button id="cf-submit" class="w-full bg-ivory text-ink py-4 text-[.72rem] tracking-wides uppercase hover:bg-champagne transition-colors">Enviar solicitud</button>
+          </div>
+          <div id="cf-success" class="absolute inset-0 flex flex-col items-center justify-center text-center px-8 opacity-0 pointer-events-none">
+            <div class="w-14 h-14 rounded-full border border-rosegold flex items-center justify-center mb-5"><i data-lucide="check" class="w-6 h-6 text-rosegold"></i></div>
+            <p class="font-display text-xl mb-2">Solicitud enviada</p>
+            <p class="text-ivory/60 text-sm font-light">Laura se pondrá en contacto contigo muy pronto.</p>
           </div>
         </div>
       </div>
@@ -450,9 +474,9 @@ const svc = document.getElementById('svc-grid');
 services.forEach((s,i)=>{
   svc.insertAdjacentHTML('beforeend', `
     <div class="svc-card group flex md:block items-baseline md:items-start gap-4 border-b border-ink/10 md:border md:border-rosegold/15 bg-transparent md:bg-ivory py-4 md:py-8 px-1 md:px-8">
-      <span class="font-display text-xs text-copper/50 shrink-0 md:hidden">${String(i+1).padStart(2,'0')}</span>
+      <span class="svc-num font-display text-xs text-copper/50 shrink-0 md:hidden">${String(i+1).padStart(2,'0')}</span>
       <div class="hidden md:flex svc-ic w-14 h-14 rounded-full bg-sand items-center justify-center mb-6 text-copper"><i data-lucide="${s.icon}" class="w-6 h-6"></i></div>
-      <div>
+      <div class="svc-text">
         <h3 class="font-display text-lg md:text-2xl mb-0.5 md:mb-3">${s.title}</h3>
         <p class="text-ink/55 text-[.82rem] md:text-sm font-light leading-snug md:leading-relaxed">${s.desc}</p>
       </div>
@@ -463,7 +487,7 @@ const gal = document.getElementById('gallery-grid');
 gallery.forEach((id,i)=>{
   const h = [340,440,380,420,360,460,400,380,430][i%9];
   gal.insertAdjacentHTML('beforeend', `
-    <div class="tile" onclick="openLB('${id}')">
+    <div class="tile gtile" onclick="openLB('${id}')">
       <img src="${id}" style="--th:${h}px" alt="Trabajo">
     </div>`);
 });
@@ -527,8 +551,15 @@ document.querySelectorAll('.faq-q').forEach(b=>{
 
 // Lightbox
 const lb=document.getElementById('lightbox'), lbImg=document.getElementById('lb-img');
-function openLB(src){ lbImg.src=src; lb.classList.remove('hidden'); lb.classList.add('flex'); }
-document.getElementById('lb-close').addEventListener('click',()=>{ lb.classList.add('hidden'); lb.classList.remove('flex'); });
+document.getElementById('cf-submit').addEventListener('click',()=>{
+  document.getElementById('cf-card').classList.add('cf-sent');
+  lucide.createIcons();
+});
+
+function openLB(src){ lbImg.src=src; lb.classList.remove('hidden'); lb.classList.add('flex'); requestAnimationFrame(()=>lb.classList.add('is-open')); }
+function closeLB(){ lb.classList.remove('is-open'); setTimeout(()=>{ lb.classList.add('hidden'); lb.classList.remove('flex'); }, reduceMotion?0:350); }
+document.getElementById('lb-close').addEventListener('click',closeLB);
+lb.addEventListener('click',e=>{ if(e.target===lb) closeLB(); });
 lb.addEventListener('click',e=>{ if(e.target===lb){ lb.classList.add('hidden'); lb.classList.remove('flex'); }});
 
 // Testimonials slider
@@ -570,6 +601,12 @@ window.addEventListener('scroll',()=>{
 
 /* ---------- GSAP ANIMATIONS ---------- */
 gsap.registerPlugin(ScrollTrigger);
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if(reduceMotion){
+  // skip all choreography: reveal targets just need to be visible
+  gsap.set('.hero-el, .reveal, .reveal-l, .reveal-r, .gtile',{opacity:1,y:0,x:0,filter:'none'});
+} else {
 
 // hero load
 gsap.set('.hero-el',{opacity:0,y:40,filter:'blur(8px)'});
@@ -586,6 +623,13 @@ function batch(sel,vars){
 batch('.reveal',{from:{opacity:0,y:40},to:{opacity:1,y:0,duration:1,ease:'power3.out'}});
 batch('.reveal-l',{from:{opacity:0,x:-50},to:{opacity:1,x:0,duration:1.1,ease:'power3.out'}});
 batch('.reveal-r',{from:{opacity:0,x:50},to:{opacity:1,x:0,duration:1.1,ease:'power3.out'}});
+
+// gallery tiles: individual staggered entrance instead of one block fade
+gsap.utils.toArray('.gtile').forEach((el,i)=>{
+  gsap.fromTo(el,{opacity:0,y:30},{opacity:1,y:0,duration:.7,delay:(i%4)*.08,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 92%'}});
+});
+
+}
 
 // counters
 document.querySelectorAll('.counter').forEach(c=>{
