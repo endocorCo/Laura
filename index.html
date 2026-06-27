@@ -76,10 +76,12 @@ tailwind.config = {
   .card-lift{ transition:transform .55s cubic-bezier(.2,.8,.2,1), box-shadow .55s ease; }
   .card-lift:hover{ transform:translateY(-10px); box-shadow:0 30px 60px -30px rgba(28,24,21,.35); }
 
-  .svc-card{ transition:.5s cubic-bezier(.2,.8,.2,1); border:1px solid rgba(183,110,121,.14); }
-  .svc-card:hover{ transform:translateY(-8px); border-color:rgba(183,110,121,.4); background:#fff; box-shadow:0 28px 50px -28px rgba(176,106,74,.3); }
+  .svc-card{ transition:.5s cubic-bezier(.2,.8,.2,1); }
   .svc-card:hover .svc-ic{ background:var(--rosegold); color:#fff; transform:rotate(-6deg) scale(1.05); }
   .svc-ic{ transition:.5s cubic-bezier(.2,.8,.2,1); }
+  @media(min-width:768px){
+    .svc-card:hover{ transform:translateY(-8px); border-color:rgba(183,110,121,.4); background:#fff; box-shadow:0 28px 50px -28px rgba(176,106,74,.3); }
+  }
 
   /* before-after slider */
   .ba-wrap{ position:relative; overflow:hidden; user-select:none; touch-action:none; }
@@ -224,7 +226,7 @@ tailwind.config = {
       <h2 class="font-display text-4xl md:text-5xl leading-tight mb-6">Una experiencia hecha a tu medida</h2>
       <p class="text-ink/60 font-light">Cada servicio se diseña a partir de un diagnóstico personalizado para lograr resultados que se sienten tan auténticos como elegantes.</p>
     </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-5">
       <!-- cards injected -->
       <div id="svc-grid" class="contents"></div>
     </div>
@@ -461,12 +463,18 @@ const faqs = [
 
 /* ---------- RENDER ---------- */
 const svc = document.getElementById('svc-grid');
-services.forEach(s=>{
+services.forEach((s,i)=>{
   svc.insertAdjacentHTML('beforeend', `
-    <div class="svc-card reveal bg-ivory p-8 group">
-      <div class="svc-ic w-14 h-14 rounded-full bg-sand flex items-center justify-center mb-6 text-copper"><i data-lucide="${s.icon}" class="w-6 h-6"></i></div>
-      <h3 class="font-display text-2xl mb-3">${s.title}</h3>
-      <p class="text-ink/60 text-sm font-light leading-relaxed">${s.desc}</p>
+    <div class="svc-card reveal group flex md:block items-start gap-5 border-b border-ink/10 md:border md:border-rosegold/15 bg-transparent md:bg-ivory py-7 md:py-8 px-1 md:px-8">
+      <div class="flex flex-col items-center gap-2 shrink-0 md:hidden w-10">
+        <span class="font-display text-xs text-copper/60">${String(i+1).padStart(2,'0')}</span>
+        <div class="svc-ic w-11 h-11 rounded-full bg-sand flex items-center justify-center text-copper"><i data-lucide="${s.icon}" class="w-5 h-5"></i></div>
+      </div>
+      <div class="hidden md:flex svc-ic w-14 h-14 rounded-full bg-sand items-center justify-center mb-6 text-copper"><i data-lucide="${s.icon}" class="w-6 h-6"></i></div>
+      <div>
+        <h3 class="font-display text-xl md:text-2xl mb-1.5 md:mb-3">${s.title}</h3>
+        <p class="text-ink/60 text-sm font-light leading-relaxed">${s.desc}</p>
+      </div>
     </div>`);
 });
 
