@@ -388,9 +388,9 @@ window.scrollTo(0,0);
     <div class="flex flex-col md:flex-row items-center justify-between gap-8">
       <a href="#hero" class="font-display text-2xl text-ivory">Laura <span class="text-rosegold italic">Zapien</span></a>
       <div class="flex items-center gap-5">
-        <a href="https://instagram.com/laurazapienoficial" target="_blank" class="w-10 h-10 rounded-full border border-ivory/20 flex items-center justify-center hover:bg-rosegold hover:border-rosegold transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
-        <a href="#" class="w-10 h-10 rounded-full border border-ivory/20 flex items-center justify-center hover:bg-rosegold hover:border-rosegold transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
-        <a href="https://wa.me/525566568134" target="_blank" class="w-10 h-10 rounded-full border border-ivory/20 flex items-center justify-center hover:bg-rosegold hover:border-rosegold transition-colors"><i data-lucide="message-circle" class="w-4 h-4"></i></a>
+        <a href="https://instagram.com/laurazapienoficial" target="_blank" class="w-10 h-10 rounded-full border border-ivory/20 flex items-center justify-center text-ivory hover:bg-rosegold hover:border-rosegold transition-colors"><i data-lucide="instagram" class="w-[18px] h-[18px]"></i></a>
+        <a href="https://www.facebook.com/LauraZapienOficial/" target="_blank" class="w-10 h-10 rounded-full border border-ivory/20 flex items-center justify-center text-ivory hover:bg-rosegold hover:border-rosegold transition-colors"><i data-lucide="facebook" class="w-[18px] h-[18px]"></i></a>
+        <a href="https://wa.me/525566568134" target="_blank" class="w-10 h-10 rounded-full border border-ivory/20 flex items-center justify-center text-ivory hover:bg-rosegold hover:border-rosegold transition-colors"><i data-lucide="message-circle" class="w-[18px] h-[18px]"></i></a>
       </div>
     </div>
     <div class="gold-line w-full my-9 opacity-30"></div>
@@ -449,7 +449,7 @@ const faqs = [
 const svc = document.getElementById('svc-grid');
 services.forEach((s,i)=>{
   svc.insertAdjacentHTML('beforeend', `
-    <div class="svc-card reveal group flex md:block items-baseline md:items-start gap-4 border-b border-ink/10 md:border md:border-rosegold/15 bg-transparent md:bg-ivory py-4 md:py-8 px-1 md:px-8">
+    <div class="svc-card group flex md:block items-baseline md:items-start gap-4 border-b border-ink/10 md:border md:border-rosegold/15 bg-transparent md:bg-ivory py-4 md:py-8 px-1 md:px-8">
       <span class="font-display text-xs text-copper/50 shrink-0 md:hidden">${String(i+1).padStart(2,'0')}</span>
       <div class="hidden md:flex svc-ic w-14 h-14 rounded-full bg-sand items-center justify-center mb-6 text-copper"><i data-lucide="${s.icon}" class="w-6 h-6"></i></div>
       <div>
@@ -586,11 +586,6 @@ function batch(sel,vars){
 batch('.reveal',{from:{opacity:0,y:40},to:{opacity:1,y:0,duration:1,ease:'power3.out'}});
 batch('.reveal-l',{from:{opacity:0,x:-50},to:{opacity:1,x:0,duration:1.1,ease:'power3.out'}});
 batch('.reveal-r',{from:{opacity:0,x:50},to:{opacity:1,x:0,duration:1.1,ease:'power3.out'}});
-
-// stagger service cards
-gsap.utils.toArray('#services .svc-card').forEach((el,i)=>{
-  gsap.fromTo(el,{opacity:0,y:50},{opacity:1,y:0,duration:.8,ease:'power3.out',delay:(i%3)*.1,scrollTrigger:{trigger:'#services',start:'top 70%'}});
-});
 
 // counters
 document.querySelectorAll('.counter').forEach(c=>{
