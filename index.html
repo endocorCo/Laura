@@ -164,7 +164,7 @@ tailwind.config = {
 
 <!-- HERO -->
 <header id="hero" class="relative h-screen w-full flex items-center justify-center overflow-hidden">
-  <div class="hero-img absolute inset-0 scale-105" style="background-image:url('https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1920&q=80')"></div>
+  <div class="hero-img absolute inset-0 scale-105" style="background-image:url('images/work-2.jpg')"></div>
   <div class="hero-overlay absolute inset-0"></div>
 
   <div class="absolute top-1/4 left-[8%] w-24 h-24 rounded-full border border-white/20 float hidden md:block"></div>
@@ -193,7 +193,7 @@ tailwind.config = {
 <section id="about" class="py-28 md:py-40 max-w-7xl mx-auto px-6 lg:px-10">
   <div class="grid lg:grid-cols-2 gap-14 lg:gap-24 items-center">
     <div class="reveal-l relative">
-      <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=900&q=80" alt="Laura Zapien" class="w-full h-[560px] object-cover">
+      <img src="images/about-laura.jpg" alt="Laura Zapien" class="w-full h-[560px] object-cover">
       <div class="absolute -bottom-7 -right-5 md:-right-9 bg-ivory shadow-2xl px-8 py-6 border border-rosegold/15">
         <p class="font-display text-5xl text-copper"><span class="counter" data-target="18">0</span>+</p>
         <p class="text-[.65rem] tracking-wides uppercase text-softgray mt-1">Años de experiencia</p>
@@ -434,9 +434,9 @@ const services = [
   {icon:'sparkles', title:'Asesoría personalizada', desc:'Diagnóstico y plan de imagen hecho solo para ti.'},
 ];
 const gallery = [
-  'photo-1560066984-138dadb4c035','photo-1522337360788-8b13dee7a37e','photo-1519699047748-de8e457a634e',
-  'photo-1487412947147-5cebf100ffc2','photo-1605497788044-5a32c7078486','photo-1500840216050-6ffa99d75160',
-  'photo-1562322140-8baeececf3df','photo-1595476108010-b4d1f102b1b1','photo-1457972729786-0411a3b2b626'
+  'images/work-1.jpg','images/work-2.jpg','images/work-3.jpg',
+  'images/work-4.jpg','images/work-5.jpg','images/event-quince-1.jpg',
+  'images/event-quince-2.jpg','images/about-laura.jpg','images/client-closeup.jpg'
 ];
 const timeline = [
   {n:'01', icon:'calendar-check', t:'Agenda', d:'Reserva tu cita y cuéntanos qué buscas lograr.'},
@@ -450,7 +450,7 @@ const testimonials = [
   {name:'Sofía R.', img:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=80', text:'El nivel de detalle y profesionalismo es altísimo. Mi corrección de color quedó impecable después de un desastre en otro salón.'},
   {name:'Valeria M.', img:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80', text:'Me maquilló para mi boda y todas mis fotos quedaron espectaculares. Duró perfecto todo el día. La recomiendo con los ojos cerrados.'},
 ];
-const igPics = ['photo-1522337660859-02fbefca4702','photo-1519415943484-9fa1873496d4','photo-1492106087820-71f1a00d2b11','photo-1605980776566-0486c3ac7617','photo-1560869713-7d0a29430803','photo-1614786269829-d24616faf56d','photo-1502823403499-6ccfcf4fb453','photo-1457972729786-0411a3b2b626'];
+const igPics = ['images/work-1.jpg','images/work-2.jpg','images/work-3.jpg','images/work-4.jpg','images/work-5.jpg','images/event-quince-1.jpg','images/event-quince-2.jpg','images/client-closeup.jpg'];
 const faqs = [
   {q:'¿Trabajas con cita?', a:'Sí. Para garantizar una atención dedicada y sin prisas, atendemos exclusivamente bajo cita previa. Puedes reservar por WhatsApp o el formulario de contacto.'},
   {q:'¿Realizas cambios de color?', a:'Por supuesto. La colorimetría es una de las especialidades de Laura, incluyendo balayage, iluminaciones, cambios totales y correcciones de color.'},
@@ -474,8 +474,8 @@ const gal = document.getElementById('gallery-grid');
 gallery.forEach((id,i)=>{
   const h = [340,440,380,420,360,460,400,380,430][i%9];
   gal.insertAdjacentHTML('beforeend', `
-    <div class="tile" onclick="openLB('https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&q=80')">
-      <img src="https://images.unsplash.com/${id}?auto=format&fit=crop&w=600&q=80" style="height:${h}px;object-fit:cover" alt="Trabajo">
+    <div class="tile" onclick="openLB('${id}')">
+      <img src="${id}" style="height:${h}px;object-fit:cover" alt="Trabajo">
     </div>`);
 });
 
@@ -516,7 +516,7 @@ const ig = document.getElementById('ig-grid');
 igPics.forEach(id=>{
   ig.insertAdjacentHTML('beforeend', `
     <a href="https://instagram.com/laurazapienoficial" target="_blank" class="ig-tile aspect-square block">
-      <img src="https://images.unsplash.com/${id}?auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover" alt="Instagram">
+      <img src="${id}" class="w-full h-full object-cover" alt="Instagram">
       <div class="ig-ov"><i data-lucide="instagram" class="w-7 h-7 text-white"></i></div>
     </a>`);
 });
