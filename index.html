@@ -110,13 +110,6 @@ tailwind.config = {
   /* testimonial track */
   .t-track{ transition:transform .7s cubic-bezier(.2,.8,.2,1); }
 
-  /* instagram */
-  .ig-tile{ position:relative; overflow:hidden; }
-  .ig-tile img{ transition:transform .8s ease; }
-  .ig-tile:hover img{ transform:scale(1.1); }
-  .ig-tile .ig-ov{ position:absolute; inset:0; background:rgba(183,110,121,.55); display:flex; align-items:center; justify-content:center; opacity:0; transition:.4s; }
-  .ig-tile:hover .ig-ov{ opacity:1; }
-
   /* faq */
   .faq-body{ max-height:0; overflow:hidden; transition:max-height .5s cubic-bezier(.2,.8,.2,1); }
   .faq-item.open .faq-body{ max-height:260px; }
@@ -323,21 +316,6 @@ tailwind.config = {
   </div>
 </section>
 
-<!-- INSTAGRAM -->
-<section class="py-28 md:py-36 bg-sand/50">
-  <div class="max-w-7xl mx-auto px-6 lg:px-10">
-    <div class="text-center max-w-2xl mx-auto mb-14 reveal">
-      <p class="eyebrow mb-5">Instagram</p>
-      <h2 class="font-display text-4xl md:text-5xl leading-tight mb-4">@laurazapienoficial</h2>
-      <p class="text-ink/60 font-light">Inspiración diaria, detrás de cámaras y nuevas transformaciones.</p>
-    </div>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 reveal" id="ig-grid"></div>
-    <div class="text-center mt-12">
-      <a href="https://instagram.com/laurazapienoficial" target="_blank" class="inline-flex items-center gap-3 btn-primary px-9 py-4 text-[.72rem] tracking-wides uppercase"><span class="flex items-center gap-3"><i data-lucide="instagram" class="w-4 h-4"></i> Ver más en Instagram</span></a>
-    </div>
-  </div>
-</section>
-
 <!-- FAQ -->
 <section class="py-28 md:py-36 max-w-3xl mx-auto px-6 lg:px-10">
   <div class="text-center mb-14 reveal">
@@ -453,7 +431,6 @@ const testimonials = [
   {name:'Sofía R.', img:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=80', text:'El nivel de detalle y profesionalismo es altísimo. Mi corrección de color quedó impecable después de un desastre en otro salón.'},
   {name:'Valeria M.', img:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80', text:'Me maquilló para mi boda y todas mis fotos quedaron espectaculares. Duró perfecto todo el día. La recomiendo con los ojos cerrados.'},
 ];
-const igPics = ['images/work-1.jpg','images/work-2.jpg','images/work-6.jpg','images/work-3.jpg','images/work-7-brows.jpg','images/work-4.jpg','images/event-quince-1.jpg','images/work-5.jpg'];
 const faqs = [
   {q:'¿Trabajas con cita?', a:'Sí. Para garantizar una atención dedicada y sin prisas, atendemos exclusivamente bajo cita previa. Puedes reservar por WhatsApp o el formulario de contacto.'},
   {q:'¿Realizas cambios de color?', a:'Por supuesto. La colorimetría es una de las especialidades de Laura, incluyendo balayage, iluminaciones, cambios totales y correcciones de color.'},
@@ -519,15 +496,6 @@ testimonials.forEach(t=>{
         <p class="eyebrow">${t.name}</p>
       </div>
     </div>`);
-});
-
-const ig = document.getElementById('ig-grid');
-igPics.forEach(id=>{
-  ig.insertAdjacentHTML('beforeend', `
-    <a href="https://instagram.com/laurazapienoficial" target="_blank" class="ig-tile aspect-square block">
-      <img src="${id}" class="w-full h-full object-cover" alt="Instagram">
-      <div class="ig-ov"><i data-lucide="instagram" class="w-7 h-7 text-white"></i></div>
-    </a>`);
 });
 
 const fq = document.getElementById('faq');
