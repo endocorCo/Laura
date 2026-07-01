@@ -647,42 +647,42 @@ window.scrollTo(0,0);
 const WA = 'https://wa.me/525566568134?text=Hola%2C+';
 
 const svcCabello = [
-  {icon:'scissors', title:'Cortes', desc:'Cortes personalizados para tu tipo de rostro, textura de cabello y estilo de vida.', img:'https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+corte+de+cabello'},
-  {icon:'sun', title:'Color', desc:'Desde raíces hasta balayage y corrección de color. Colorimetría experta con productos premium.', img:'images/work-4.jpg', wa:'me+interesa+agendar+un+servicio+de+color+de+cabello'},
-  {icon:'wind', title:'Alaciados Progresivos', desc:'Tratamiento alisador que elimina el frizz y da brillo duradero, cuidando la salud del cabello.', img:'images/work-6.jpg', wa:'me+interesa+agendar+un+servicio+de+alisado+progresivo'},
-  {icon:'droplets', title:'Rizos', desc:'Definición y cuidado de rizos naturales con técnicas especializadas para cada tipo de curl.', img:'images/work-1.jpg', wa:'me+interesa+agendar+un+servicio+de+rizos'},
-  {icon:'flower-2', title:'Peinados Frontales', desc:'Peinados de acabado para eventos, ceremonias y ocasiones especiales con técnica impecable.', img:'https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+peinado+frontal'},
-  {icon:'shield-check', title:'Tratamientos Capilares', desc:'Hidratación profunda, keratina y nutrición para restaurar la salud y el brillo de tu cabello.', img:'images/work-5.jpg', wa:'me+interesa+agendar+un+tratamiento+capilar'},
+  {slug:'cortes', icon:'scissors', title:'Cortes', desc:'Cortes personalizados para tu tipo de rostro, textura de cabello y estilo de vida.', img:'https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+corte+de+cabello'},
+  {slug:'color', icon:'sun', title:'Color', desc:'Desde raíces hasta balayage y corrección de color. Colorimetría experta con productos premium.', img:'images/work-4.jpg', wa:'me+interesa+agendar+un+servicio+de+color+de+cabello'},
+  {slug:'alaciados-progresivos', icon:'wind', title:'Alaciados Progresivos', desc:'Tratamiento alisador que elimina el frizz y da brillo duradero, cuidando la salud del cabello.', img:'images/work-6.jpg', wa:'me+interesa+agendar+un+servicio+de+alisado+progresivo'},
+  {slug:'rizos', icon:'droplets', title:'Rizos', desc:'Definición y cuidado de rizos naturales con técnicas especializadas para cada tipo de curl.', img:'images/work-1.jpg', wa:'me+interesa+agendar+un+servicio+de+rizos'},
+  {slug:'peinados-frontales', icon:'flower-2', title:'Peinados Frontales', desc:'Peinados de acabado para eventos, ceremonias y ocasiones especiales con técnica impecable.', img:'https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+peinado+frontal'},
+  {slug:'tratamientos-capilares', icon:'shield-check', title:'Tratamientos Capilares', desc:'Hidratación profunda, keratina y nutrición para restaurar la salud y el brillo de tu cabello.', img:'images/work-5.jpg', wa:'me+interesa+agendar+un+tratamiento+capilar'},
 ];
 
 const svcBelleza = [
-  {icon:'brush', title:'Maquillaje', desc:'Maquillaje profesional para fotografía, eventos sociales y sesiones editoriales.', img:'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+maquillaje'},
-  {icon:'heart', title:'Novias Sociales', desc:'Looks nupciales duraderos e impecables para el día más importante de tu vida.', img:'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+informaci%C3%B3n+sobre+maquillaje+para+novia'},
-  {icon:'gem', title:'Quinceañeras', desc:'Transformación completa para quinceañeras: peinado, maquillaje y estilismo integral.', img:'images/event-quince-2.jpg', wa:'me+interesa+informaci%C3%B3n+sobre+servicios+para+quincea%C3%B1era'},
-  {icon:'eye', title:'Lash Lifting', desc:'Elevación y curvado de pestañas naturales que abre la mirada sin extensiones.', img:'images/work-7-brows.jpg', wa:'me+interesa+agendar+un+servicio+de+lash+lifting'},
-  {icon:'palette', title:'Pigmentación de Cejas', desc:'Define y da forma a tus cejas con pigmentación duradera y aspecto natural.', img:'images/work-7-brows.jpg', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+cejas'},
-  {icon:'sparkles', title:'Pigmentación de Ojos', desc:'Delineado permanente que realza y enmarca tu mirada con precisión artística.', img:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+ojos'},
+  {slug:'maquillaje', icon:'brush', title:'Maquillaje', desc:'Maquillaje profesional para fotografía, eventos sociales y sesiones editoriales.', img:'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+maquillaje'},
+  {slug:'novias-sociales', icon:'heart', title:'Novias Sociales', desc:'Looks nupciales duraderos e impecables para el día más importante de tu vida.', img:'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+informaci%C3%B3n+sobre+maquillaje+para+novia'},
+  {slug:'quinceañeras', icon:'gem', title:'Quinceañeras', desc:'Transformación completa para quinceañeras: peinado, maquillaje y estilismo integral.', img:'images/event-quince-2.jpg', wa:'me+interesa+informaci%C3%B3n+sobre+servicios+para+quincea%C3%B1era'},
+  {slug:'lash-lifting', icon:'eye', title:'Lash Lifting', desc:'Elevación y curvado de pestañas naturales que abre la mirada sin extensiones.', img:'images/work-7-brows.jpg', wa:'me+interesa+agendar+un+servicio+de+lash+lifting'},
+  {slug:'pigmentacion-cejas', icon:'palette', title:'Pigmentación de Cejas', desc:'Define y da forma a tus cejas con pigmentación duradera y aspecto natural.', img:'images/work-7-brows.jpg', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+cejas'},
+  {slug:'pigmentacion-ojos', icon:'sparkles', title:'Pigmentación de Ojos', desc:'Delineado permanente que realza y enmarca tu mirada con precisión artística.', img:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+ojos'},
 ];
 
 const svcCuidado = [
-  {icon:'smile', title:'Pigmentación de Labios', desc:'Color y definición duraderos para tus labios, con resultados naturales y elegantes.', img:'https://images.unsplash.com/photo-1586495777744-4e6232bf4bdf?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+labios'},
-  {icon:'star', title:'Uñas', desc:'Manicure, semipermanente y nail art con acabados de calidad salón.', img:'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+u%C3%B1as'},
-  {icon:'feather', title:'Depilaciones con Cera', desc:'Depilación profesional con cera para resultados suaves y duraderos.', img:'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+depilaci%C3%B3n'},
-  {icon:'droplet', title:'Pedicure', desc:'Cuidado completo de pies con tratamiento hidratante y acabado perfecto.', img:'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+pedicure'},
-  {icon:'shopping-bag', title:'Venta de Producto', desc:'Productos profesionales para mantener tus resultados en casa.', img:'https://images.unsplash.com/photo-1522338242992-e1a54906a8da?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+consultar+productos+disponibles'},
+  {slug:'pigmentacion-labios', icon:'smile', title:'Pigmentación de Labios', desc:'Color y definición duraderos para tus labios, con resultados naturales y elegantes.', img:'https://images.unsplash.com/photo-1586495777744-4e6232bf4bdf?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+labios'},
+  {slug:'unas', icon:'star', title:'Uñas', desc:'Manicure, semipermanente y nail art con acabados de calidad salón.', img:'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+u%C3%B1as'},
+  {slug:'depilaciones', icon:'feather', title:'Depilaciones con Cera', desc:'Depilación profesional con cera para resultados suaves y duraderos.', img:'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+depilaci%C3%B3n'},
+  {slug:'pedicure', icon:'droplet', title:'Pedicure', desc:'Cuidado completo de pies con tratamiento hidratante y acabado perfecto.', img:'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+pedicure'},
+  {slug:'venta-producto', icon:'shopping-bag', title:'Venta de Producto', desc:'Productos profesionales para mantener tus resultados en casa.', img:'https://images.unsplash.com/photo-1522338242992-e1a54906a8da?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+consultar+productos+disponibles'},
 ];
 
 const pigments = [
-  {icon:'palette', title:'Cejas', desc:'Microblading y sombreado de cejas que enmarcan tu rostro de forma natural y duradera.', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+cejas'},
-  {icon:'eye', title:'Ojos', desc:'Delineado superior e inferior permanente para una mirada definida sin esfuerzo diario.', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+ojos'},
-  {icon:'smile', title:'Labios', desc:'Contorno y relleno de labios con pigmentación semipermanente de aspecto natural.', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+labios'},
+  {slug:'pigmentacion-cejas', icon:'palette', title:'Cejas', desc:'Microblading y sombreado de cejas que enmarcan tu rostro de forma natural y duradera.', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+cejas'},
+  {slug:'pigmentacion-ojos', icon:'eye', title:'Ojos', desc:'Delineado superior e inferior permanente para una mirada definida sin esfuerzo diario.', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+ojos'},
+  {slug:'pigmentacion-labios', icon:'smile', title:'Labios', desc:'Contorno y relleno de labios con pigmentación semipermanente de aspecto natural.', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+labios'},
 ];
 
 const cuidadoItems = [
-  {icon:'star', title:'Uñas', desc:'Manicure y nail art profesional', wa:'me+interesa+agendar+un+servicio+de+u%C3%B1as'},
-  {icon:'droplet', title:'Pedicure', desc:'Cuidado completo de pies', wa:'me+interesa+agendar+un+servicio+de+pedicure'},
-  {icon:'feather', title:'Depilaciones', desc:'Con cera, suave y duradera', wa:'me+interesa+agendar+un+servicio+de+depilaci%C3%B3n'},
-  {icon:'eye', title:'Lash Lifting', desc:'Curvado natural de pestañas', wa:'me+interesa+agendar+un+servicio+de+lash+lifting'},
+  {slug:'unas', icon:'star', title:'Uñas', desc:'Manicure y nail art profesional', wa:'me+interesa+agendar+un+servicio+de+u%C3%B1as'},
+  {slug:'pedicure', icon:'droplet', title:'Pedicure', desc:'Cuidado completo de pies', wa:'me+interesa+agendar+un+servicio+de+pedicure'},
+  {slug:'depilaciones', icon:'feather', title:'Depilaciones', desc:'Con cera, suave y duradera', wa:'me+interesa+agendar+un+servicio+de+depilaci%C3%B3n'},
+  {slug:'lash-lifting', icon:'eye', title:'Lash Lifting', desc:'Curvado natural de pestañas', wa:'me+interesa+agendar+un+servicio+de+lash+lifting'},
 ];
 
 const gallery = [
@@ -729,22 +729,26 @@ const cursosLash = [
 
 /* ---------- HELPERS ---------- */
 function svcVisCard(s){
-  return `<div class="svc-vis bg-ivory border border-rosegold/10 overflow-hidden group cursor-default">
-    <div class="relative overflow-hidden h-52">
+  const detailUrl = `servicio.html?id=${s.slug}`;
+  return `<div class="svc-vis bg-ivory border border-rosegold/10 overflow-hidden group">
+    <a href="${detailUrl}" class="block relative overflow-hidden h-52">
       ${s.img
         ? `<img src="${s.img}" class="svc-vis-img w-full h-full object-cover" alt="${s.title}">`
         : `<div class="img-ph w-full h-full flex items-center justify-center"><i data-lucide="${s.icon}" class="w-10 h-10 text-rosegold/40"></i></div>`}
       <div class="svc-vis-overlay absolute inset-0 bg-ink/40 flex items-center justify-center">
-        <a href="${WA}${s.wa}" target="_blank" class="bg-ivory text-ink text-[.65rem] tracking-wides uppercase px-5 py-2 hover:bg-champagne transition-colors">Agendar</a>
+        <span class="bg-ivory text-ink text-[.65rem] tracking-wides uppercase px-5 py-2">Ver más</span>
       </div>
-    </div>
+    </a>
     <div class="p-6">
       <div class="flex items-center gap-3 mb-2">
         <i data-lucide="${s.icon}" class="w-4 h-4 text-rosegold shrink-0"></i>
         <h3 class="font-display text-lg">${s.title}</h3>
       </div>
       <p class="text-ink/55 text-[.82rem] font-light leading-relaxed mb-4">${s.desc}</p>
-      <a href="${WA}${s.wa}" target="_blank" class="inline-flex items-center gap-2 text-[.65rem] tracking-wides uppercase text-copper hover:text-rosegold transition-colors"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i>Agendar por WhatsApp</a>
+      <div class="flex items-center justify-between gap-3">
+        <a href="${detailUrl}" class="inline-flex items-center gap-1.5 text-[.65rem] tracking-wides uppercase text-ink/50 hover:text-rosegold transition-colors"><i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>Ver detalle</a>
+        <a href="${WA}${s.wa}" target="_blank" class="inline-flex items-center gap-1.5 text-[.65rem] tracking-wides uppercase text-copper hover:text-rosegold transition-colors"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i>WhatsApp</a>
+      </div>
     </div>
   </div>`;
 }
@@ -797,7 +801,10 @@ pigments.forEach(p => {
       </div>
       <h4 class="font-display text-xl mb-3">${p.title}</h4>
       <p class="text-ink/60 text-sm font-light leading-relaxed mb-5">${p.desc}</p>
-      <a href="${WA}${p.wa}" target="_blank" class="inline-flex items-center gap-2 text-[.65rem] tracking-wides uppercase text-copper hover:text-rosegold transition-colors"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i>Consultar</a>
+      <div class="flex items-center justify-center gap-4">
+        <a href="servicio.html?id=${p.slug}" class="inline-flex items-center gap-1.5 text-[.65rem] tracking-wides uppercase text-ink/50 hover:text-rosegold transition-colors"><i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>Ver más</a>
+        <a href="${WA}${p.wa}" target="_blank" class="inline-flex items-center gap-1.5 text-[.65rem] tracking-wides uppercase text-copper hover:text-rosegold transition-colors"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i>WhatsApp</a>
+      </div>
     </div>`);
 });
 
@@ -811,7 +818,10 @@ cuidadoItems.forEach(c => {
       </div>
       <h4 class="font-display text-lg">${c.title}</h4>
       <p class="text-ink/55 text-sm font-light">${c.desc}</p>
-      <a href="${WA}${c.wa}" target="_blank" class="mt-auto inline-flex items-center gap-2 text-[.65rem] tracking-wides uppercase text-copper hover:text-rosegold transition-colors"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i>Agendar</a>
+      <div class="mt-auto flex items-center gap-4">
+        <a href="servicio.html?id=${c.slug}" class="inline-flex items-center gap-1.5 text-[.65rem] tracking-wides uppercase text-ink/50 hover:text-rosegold transition-colors"><i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>Ver más</a>
+        <a href="${WA}${c.wa}" target="_blank" class="inline-flex items-center gap-1.5 text-[.65rem] tracking-wides uppercase text-copper hover:text-rosegold transition-colors"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i>WhatsApp</a>
+      </div>
     </div>`);
 });
 

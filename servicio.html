@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Servicio · Laura Zapien Studio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { display:['"Playfair Display"','serif'], body:['Manrope','sans-serif'] },
+      colors: { ivory:'#FBF8F4', sand:'#F1E9DE', beige:'#E4D5C3', warmbeige:'#D8C3AC', rosegold:'#B76E79', copper:'#B06A4A', champagne:'#D9C2A6', ink:'#1C1815', softgray:'#9C948B' },
+      letterSpacing:{ wides:'0.28em' }
+    }
+  }
+}
+</script>
+<style>
+  :root{ --ivory:#FBF8F4;--sand:#F1E9DE;--beige:#E4D5C3;--rosegold:#B76E79;--copper:#B06A4A;--champagne:#D9C2A6;--ink:#1C1815;--softgray:#9C948B; }
+  *{ scroll-behavior:smooth; }
+  body{ background:var(--ivory); color:var(--ink); overflow-x:hidden; font-family:'Manrope',sans-serif; }
+  ::selection{ background:var(--rosegold);color:#fff; }
+  .eyebrow{ font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--copper);font-weight:600; }
+  .gold-line{ height:1px;background:linear-gradient(90deg,transparent,var(--rosegold),transparent); }
+  .glass{ background:rgba(251,248,244,.72);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);border-bottom:1px solid rgba(183,110,121,.12); }
+  .link-underline{ position:relative; }
+  .link-underline::after{ content:'';position:absolute;left:0;bottom:-3px;height:1px;width:0;background:var(--rosegold);transition:width .4s; }
+  .link-underline:hover::after{ width:100%; }
+  .btn-primary{ background:var(--ink);color:var(--ivory);transition:.45s;position:relative;overflow:hidden; }
+  .btn-primary span{ position:relative;z-index:2; }
+  .btn-primary::before{ content:'';position:absolute;inset:0;background:linear-gradient(120deg,var(--rosegold),var(--copper));transform:translateY(101%);transition:transform .5s cubic-bezier(.2,.8,.2,1); }
+  .btn-primary:hover::before{ transform:translateY(0); }
+  .btn-wa{ background:#25D366;color:#fff;transition:opacity .3s; }
+  .btn-wa:hover{ opacity:.88; }
+  .img-ph{ background:linear-gradient(135deg,var(--sand) 0%,var(--beige) 50%,var(--champagne) 100%); }
+  /* gallery masonry */
+  .masonry{ column-count:3;column-gap:1rem; }
+  @media(max-width:1024px){ .masonry{column-count:2} }
+  @media(max-width:640px){ .masonry{column-count:1} }
+  .gtile{ break-inside:avoid;margin-bottom:1rem;overflow:hidden;position:relative;cursor:pointer; }
+  .gtile img{ width:100%;display:block;transition:transform .8s cubic-bezier(.2,.8,.2,1);object-fit:cover; }
+  .gtile:hover img{ transform:scale(1.06); }
+  .gtile::after{ content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(28,24,21,.5));opacity:0;transition:.5s; }
+  .gtile:hover::after{ opacity:1; }
+  /* lightbox */
+  #lightbox{ background:rgba(20,17,15,.92);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .35s cubic-bezier(.16,1,.3,1); }
+  #lightbox.is-open{ opacity:1;pointer-events:auto; }
+  #lightbox img{ transform:scale(.94);transition:transform .4s cubic-bezier(.16,1,.3,1); }
+  #lightbox.is-open img{ transform:scale(1); }
+  .reveal{ opacity:0;transform:translateY(40px); }
+  .reveal-l{ opacity:0;transform:translateX(-50px); }
+  .reveal-r{ opacity:0;transform:translateX(50px); }
+  .hero-overlay{ background:linear-gradient(180deg,rgba(28,24,21,.6) 0%,rgba(28,24,21,.3) 50%,rgba(28,24,21,.7) 100%); }
+  /* include list */
+  .include-item{ display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 0;border-bottom:1px solid rgba(183,110,121,.12); }
+  @media(prefers-reduced-motion:reduce){ *,*::before,*::after{ animation-duration:.01ms!important;transition-duration:.01ms!important; } }
+</style>
+</head>
+<body class="font-body antialiased">
+
+<!-- NAV -->
+<nav class="glass fixed top-0 inset-x-0 z-[100]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+    <a href="index.html#hero" class="font-display text-xl tracking-wide">Laura&nbsp;<span class="text-rosegold italic">Zapien</span></a>
+    <div class="hidden lg:flex items-center gap-7 text-[.78rem] tracking-wide text-ink/80">
+      <a href="index.html#about" class="link-underline">Sobre Laura</a>
+      <a href="index.html#services" class="link-underline">Servicios</a>
+      <a href="index.html#cabello" class="link-underline">Cabello</a>
+      <a href="index.html#gallery" class="link-underline">Galería</a>
+      <a href="index.html#belleza" class="link-underline">Belleza</a>
+      <a href="index.html#courses" class="link-underline">Cursos</a>
+      <a href="index.html#productos" class="link-underline">Productos</a>
+      <a href="index.html#contact" class="link-underline">Contacto</a>
+    </div>
+    <a href="index.html#contact" class="btn-primary px-6 py-3 text-[.72rem] tracking-wides uppercase hidden sm:inline-flex"><span>Agenda tu cita</span></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div id="svc-hero" class="relative pt-20 min-h-[60vh] flex items-end justify-start overflow-hidden">
+  <div id="hero-bg" class="absolute inset-0 bg-cover bg-center scale-105 transition-transform duration-[3s]"></div>
+  <div class="hero-overlay absolute inset-0"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pb-16 w-full">
+    <a href="index.html#services" class="inline-flex items-center gap-2 text-white/70 text-[.7rem] tracking-wides uppercase mb-6 hover:text-white transition-colors"><i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>Volver a servicios</a>
+    <p id="svc-cat" class="eyebrow !text-champagne mb-3"></p>
+    <h1 id="svc-title" class="font-display text-white text-5xl md:text-7xl leading-none mb-4"></h1>
+    <p id="svc-tagline" class="text-white/75 font-light text-lg max-w-xl"></p>
+  </div>
+</div>
+
+<!-- BODY -->
+<main class="max-w-7xl mx-auto px-6 lg:px-10 py-20">
+  <div class="grid lg:grid-cols-3 gap-14 mb-20">
+    <!-- description -->
+    <div class="lg:col-span-2 reveal-l">
+      <p class="eyebrow mb-4">Descripción</p>
+      <h2 id="svc-subtitle" class="font-display text-3xl md:text-4xl leading-tight mb-6"></h2>
+      <div class="gold-line w-20 mb-8"></div>
+      <div id="svc-desc" class="text-ink/70 font-light leading-relaxed space-y-4 text-[.95rem]"></div>
+    </div>
+    <!-- sidebar -->
+    <div class="reveal-r">
+      <div class="border border-rosegold/15 bg-sand/40 p-8">
+        <p class="eyebrow mb-5">¿Qué incluye?</p>
+        <ul id="svc-includes" class="mb-8"></ul>
+        <p class="eyebrow mb-4">¿Para quién es?</p>
+        <p id="svc-for" class="text-ink/65 text-sm font-light leading-relaxed mb-8"></p>
+        <a id="svc-wa" href="#" target="_blank" class="btn-wa inline-flex items-center justify-center gap-3 w-full py-4 text-[.72rem] tracking-wides uppercase"><i data-lucide="message-circle" class="w-4 h-4"></i>Agendar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- gallery -->
+  <div class="reveal">
+    <div class="flex items-center gap-4 mb-10">
+      <p class="eyebrow">Galería</p>
+      <div class="flex-1 h-px bg-rosegold/20"></div>
+    </div>
+    <div class="masonry" id="svc-gallery"></div>
+  </div>
+
+  <!-- CTA band -->
+  <div class="mt-20 bg-ink text-ivory p-10 md:p-14 text-center reveal">
+    <p class="eyebrow !text-champagne mb-4">¿Lista para tu transformación?</p>
+    <h3 id="cta-title" class="font-display text-3xl md:text-4xl mb-6"></h3>
+    <p class="text-ivory/65 font-light mb-8 max-w-lg mx-auto text-sm">Agenda tu cita con Laura y recibe una atención completamente personalizada.</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a id="cta-wa" href="#" target="_blank" class="btn-wa inline-flex items-center justify-center gap-3 px-8 py-4 text-[.72rem] tracking-wides uppercase"><i data-lucide="message-circle" class="w-4 h-4"></i>Agendar por WhatsApp</a>
+      <a href="index.html#contact" class="inline-flex items-center justify-center gap-3 bg-ivory/10 border border-ivory/20 text-ivory px-8 py-4 text-[.72rem] tracking-wides uppercase hover:bg-ivory/20 transition-colors">Formulario de contacto</a>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-ink text-ivory/60 border-t border-ivory/10 mt-10">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 py-14">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+      <a href="index.html" class="font-display text-2xl text-ivory">Laura <span class="text-rosegold italic">Zapien</span></a>
+      <div class="flex items-center gap-5">
+        <a href="https://instagram.com/laurazapienoficial" target="_blank" class="w-10 h-10 rounded-full border border-ivory/20 flex items-center justify-center text-ivory hover:bg-rosegold hover:border-rosegold transition-colors"><i data-lucide="instagram" class="w-[18px] h-[18px]"></i></a>
+        <a href="https://www.facebook.com/LauraZapienOficial/" target="_blank" class="w-10 h-10 rounded-full border border-ivory/20 flex items-center justify-center text-ivory hover:bg-rosegold hover:border-rosegold transition-colors"><i data-lucide="facebook" class="w-[18px] h-[18px]"></i></a>
+        <a href="https://wa.me/525566568134" target="_blank" class="w-10 h-10 rounded-full border border-ivory/20 flex items-center justify-center text-ivory hover:bg-rosegold hover:border-rosegold transition-colors"><i data-lucide="message-circle" class="w-[18px] h-[18px]"></i></a>
+      </div>
+    </div>
+    <div class="gold-line w-full my-9 opacity-30"></div>
+    <p class="text-center text-xs tracking-wide text-ivory/40">© 2026 Laura Zapien Studio · Hair Artist & Makeup Artist · Papalotla, Estado de México</p>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="fixed inset-0 z-[200] hidden items-center justify-center p-6">
+  <button id="lb-close" class="absolute top-6 right-6 text-white/80 hover:text-white"><i data-lucide="x" class="w-8 h-8"></i></button>
+  <img id="lb-img" src="" class="max-w-full max-h-[85vh] object-contain shadow-2xl">
+</div>
+
+<script>
+const WA_BASE = 'https://wa.me/525566568134?text=Hola%2C+';
+
+/* ── SERVICE DATA ──────────────────────────────────────────────── */
+const SERVICES = {
+  /* CABELLO */
+  'cortes': {
+    cat:'Cabello',
+    title:'Cortes',
+    tagline:'Forma que nace de tu esencia.',
+    subtitle:'El corte que te transforma',
+    desc:[
+      'Un buen corte no es solo quitar largo: es entender la forma de tu rostro, la textura de tu cabello y tu ritmo de vida. Laura realiza diagnósticos individuales antes de cada corte para garantizar que el resultado sea perfectamente tuyo.',
+      'Trabaja con tijeras y navajas de alta calidad, aplicando técnicas de corte seco y húmedo según el tipo de cabello. Desde cortes clásicos hasta propuestas más contemporáneas, siempre con acabados de precisión.',
+      'Cada sesión incluye un lavado con productos profesionales, el corte y un blow-dry de finalización para que puedas ver el resultado real desde el primer momento.',
+    ],
+    includes:['Diagnóstico personalizado de rostro y textura','Lavado con productos profesionales','Corte con tijera o navaja','Secado y acabado profesional','Recomendaciones de mantenimiento en casa'],
+    forWho:'Ideal para quienes buscan renovar su imagen o mantener su corte con precisión y cuidado profesional.',
+    wa:'me+interesa+agendar+un+servicio+de+corte+de+cabello',
+    hero:'https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=1400&q=80',
+    gallery:[
+      {src:'https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=800&q=80',h:420},
+      {src:'images/work-2.jpg',h:360},
+      {src:'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80',h:480},
+      {src:'images/work-3.jpg',h:380},
+      {src:'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=800&q=80',h:440},
+      {src:'images/work-1.jpg',h:400},
+    ]
+  },
+  'color': {
+    cat:'Cabello',
+    title:'Color',
+    tagline:'Colorimetría que cuida y transforma.',
+    subtitle:'Color que habla de ti',
+    desc:[
+      'El color de cabello es una de las decisiones estéticas más poderosas y, también, la más delicada. Laura tiene más de 18 años especializándose en colorimetría, lo que le permite ofrecer resultados precisos, duraderos y saludables.',
+      'Sus servicios de color abarcan desde raíces y mechas hasta balayage, iluminaciones, cambios de color total y correcciones de color complejas. Trabaja con marcas profesionales de alta gama para minimizar el daño y maximizar el brillo.',
+      'Cada proceso comienza con un análisis del tono natural, historial de químicos y estado del cabello, asegurando que cada elección de color sea la correcta para tu caso específico.',
+    ],
+    includes:['Diagnóstico de tono y estado capilar','Aplicación de color con productos profesionales','Técnica según tu tipo de cabello','Tratamiento de nutrición post-color','Asesoría de mantenimiento y cuidado'],
+    forWho:'Para quienes quieren cambiar, unificar, iluminar o corregir el color de su cabello con técnica y seguridad.',
+    wa:'me+interesa+agendar+un+servicio+de+color+de+cabello',
+    hero:'images/work-4.jpg',
+    gallery:[
+      {src:'images/work-4.jpg',h:460},
+      {src:'images/work-3.jpg',h:380},
+      {src:'images/work-2.jpg',h:420},
+      {src:'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80',h:400},
+      {src:'images/work-5.jpg',h:360},
+      {src:'images/work-1.jpg',h:440},
+    ]
+  },
+  'alaciados-progresivos': {
+    cat:'Cabello',
+    title:'Alaciados Progresivos',
+    tagline:'Cabello liso, brillante y libre de frizz.',
+    subtitle:'Liso de salón, duradero y saludable',
+    desc:[
+      'El alisado progresivo es uno de los tratamientos más demandados en el estudio. A diferencia de procesos más agresivos, el alisado que realiza Laura está formulado para reducir el frizz y dar fluidez al cabello sin sacrificar su salud.',
+      'Se aplica con productos de baja toxicidad que sellan la cutícula capilar, aportando brillo, suavidad y manejabilidad. El resultado puede durar entre 3 y 5 meses dependiendo del cuidado en casa y el tipo de cabello.',
+      'El proceso completo incluye lavado, aplicación del tratamiento, sellado con calor, secado y planchado final. Laura recomendará los productos ideales para prolongar el resultado.',
+    ],
+    includes:['Lavado profundo preparatorio','Aplicación del tratamiento alisador','Sellado con calor profesional','Planchado y acabado final','Guía de cuidado post-tratamiento'],
+    forWho:'Ideal para quienes tienen cabello con frizz, ondulado o rizado y buscan manejabilidad sin perder la naturalidad.',
+    wa:'me+interesa+agendar+un+servicio+de+alisado+progresivo',
+    hero:'images/work-6.jpg',
+    gallery:[
+      {src:'images/work-6.jpg',h:460},
+      {src:'images/work-2.jpg',h:380},
+      {src:'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80',h:420},
+      {src:'images/work-1.jpg',h:400},
+      {src:'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=800&q=80',h:360},
+      {src:'images/work-5.jpg',h:440},
+    ]
+  },
+  'rizos': {
+    cat:'Cabello',
+    title:'Rizos',
+    tagline:'Rizos definidos, hidratados y llenos de vida.',
+    subtitle:'Tu rizo, con toda su personalidad',
+    desc:[
+      'El cabello rizado tiene sus propias reglas y merece su propia especialidad. Laura trabaja con técnicas específicas para cabello rizado y ondulado, entendiendo que cada curl tiene una forma y necesidad únicas.',
+      'Ofrece tratamientos de definición, hidratación profunda, cortes especializados para rizado y asesoría sobre rutinas que respeten la estructura natural del cabello. Se apoya en productos libres de sulfatos y siliconas para potenciar la salud del rizo.',
+      'El objetivo no es dominar el rizo, sino celebrarlo: que luzca definido, hidratado, sin frizz y con movimiento natural desde la raíz hasta las puntas.',
+    ],
+    includes:['Diagnóstico del tipo de rizo','Lavado con productos free sulfate','Tratamiento de definición e hidratación','Corte especializado en rizado (opcional)','Rutina recomendada personalizada'],
+    forWho:'Para quienes quieren abrazar y cuidar su textura natural o necesitan retomar el control de sus rizos.',
+    wa:'me+interesa+agendar+un+servicio+de+rizos',
+    hero:'images/work-1.jpg',
+    gallery:[
+      {src:'images/work-1.jpg',h:460},
+      {src:'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80',h:380},
+      {src:'images/work-2.jpg',h:420},
+      {src:'images/work-3.jpg',h:400},
+      {src:'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=800&q=80',h:360},
+      {src:'images/client-closeup.jpg',h:440},
+    ]
+  },
+  'peinados-frontales': {
+    cat:'Cabello',
+    title:'Peinados Frontales',
+    tagline:'El toque final que hace la diferencia.',
+    subtitle:'Peinados que acompañan tus momentos',
+    desc:[
+      'Un peinado profesional puede transformar completamente cualquier look. Laura crea peinados para eventos sociales, ceremonias, graduaciones, quince años y cualquier ocasión que merezca un acabado impecable.',
+      'Trabaja tanto con cabello natural como con extensiones y postizos, utilizando técnicas de fijación de alta duración para garantizar que el peinado resista toda la jornada, sin importar el calor o la actividad.',
+      'Cada peinado se diseña en función del outfit, el maquillaje y la personalidad de quien lo lleva. Se realizan pruebas previas disponibles para eventos importantes como bodas o quince años.',
+    ],
+    includes:['Consulta de estilo y diseño del peinado','Preparación del cabello con termal y fijadores profesionales','Peinado con técnica y fijación de larga duración','Toques finales con accesorios (opcional)','Opción de prueba previa para eventos grandes'],
+    forWho:'Para novias, quinceañeras, invitadas a eventos o cualquier persona que quiera un acabado elegante y duradero.',
+    wa:'me+interesa+agendar+un+servicio+de+peinado+frontal',
+    hero:'https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=1400&q=80',
+    gallery:[
+      {src:'https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=800&q=80',h:460},
+      {src:'images/event-quince-2.jpg',h:400},
+      {src:'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80',h:380},
+      {src:'images/work-2.jpg',h:420},
+      {src:'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',h:440},
+      {src:'images/client-closeup.jpg',h:360},
+    ]
+  },
+  'tratamientos-capilares': {
+    cat:'Cabello',
+    title:'Tratamientos Capilares',
+    tagline:'Nutrición y salud desde la raíz hasta las puntas.',
+    subtitle:'Cabello sano desde adentro',
+    desc:[
+      'La salud del cabello es la base de cualquier transformación. Sin estructura fuerte y sin hidratación adecuada, ningún color ni alisado llegará a su máximo potencial. Por eso, Laura ofrece una línea completa de tratamientos restauradores.',
+      'Sus tratamientos incluyen hidratación profunda con mascarillas de keratina, reconstrucción proteica para cabello dañado o quebradizo, tratamientos de brillo y nutrición para cabellos opacos, y terapias capilares para cuero cabelludo.',
+      'Cada tratamiento se elige después de un análisis del estado real del cabello, garantizando que lo que se aplica sea exactamente lo que necesita, sin sobrecargar ni desperdiciar.',
+    ],
+    includes:['Diagnóstico del estado capilar','Selección del tratamiento adecuado','Aplicación con calor para mejor absorción','Enjuague y acabado profesional','Recomendaciones de mantenimiento en casa'],
+    forWho:'Para cabellos dañados por químicos, calor excesivo, decoloración o quienes simplemente quieren mantener su cabello en óptimas condiciones.',
+    wa:'me+interesa+agendar+un+tratamiento+capilar',
+    hero:'images/work-5.jpg',
+    gallery:[
+      {src:'images/work-5.jpg',h:460},
+      {src:'images/work-3.jpg',h:380},
+      {src:'images/work-6.jpg',h:420},
+      {src:'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80',h:400},
+      {src:'images/work-2.jpg',h:360},
+      {src:'images/work-1.jpg',h:440},
+    ]
+  },
+
+  /* BELLEZA & EVENTOS */
+  'maquillaje': {
+    cat:'Maquillaje',
+    title:'Maquillaje',
+    tagline:'Cada rostro, una obra de arte.',
+    subtitle:'Maquillaje que dura y enamora',
+    desc:[
+      'El maquillaje que hace Laura no es solo una capa de color: es una lectura del rostro, una comprensión de la estructura y una decisión estética que respeta y realza la belleza de cada persona.',
+      'Realiza maquillaje para todo tipo de eventos: sesiones fotográficas, eventos sociales, cumpleaños, graduaciones, reuniones de trabajo importantes o simplemente porque quieres verte increíble. Con técnicas de alta duración, el maquillaje se mantiene impecable por horas.',
+      'Utiliza productos profesionales de primeras marcas que ofrecen cobertura real, fijación de larga duración y cuidado para la piel. El resultado siempre es elegante, refinado y personalizado a tu tono de piel y preferencias.',
+    ],
+    includes:['Consulta previa de estilo y ocasión','Preparación e hidratación de la piel','Aplicación de maquillaje con productos premium','Técnica de larga duración','Fijación profesional final'],
+    forWho:'Para quien quiere verse impecable en cualquier evento o sesión fotográfica, con un resultado que dure todo el día.',
+    wa:'me+interesa+agendar+un+servicio+de+maquillaje',
+    hero:'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=1400&q=80',
+    gallery:[
+      {src:'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80',h:460},
+      {src:'images/client-closeup.jpg',h:380},
+      {src:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80',h:420},
+      {src:'images/event-quince-2.jpg',h:400},
+      {src:'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',h:360},
+      {src:'https://images.unsplash.com/photo-1586495777744-4e6232bf4bdf?auto=format&fit=crop&w=800&q=80',h:440},
+    ]
+  },
+  'novias-sociales': {
+    cat:'Belleza & Eventos',
+    title:'Novias Sociales',
+    tagline:'El maquillaje más importante de tu vida.',
+    subtitle:'Belleza nupcial que te acompañará siempre',
+    desc:[
+      'El maquillaje de novia es uno de los trabajos que Laura toma con mayor dedicación y sensibilidad. Porque más allá de la técnica, se trata de capturar cómo quieres que el mundo te vea en el día más importante de tu vida.',
+      'El proceso comienza con una prueba de maquillaje antes de la boda, donde se define el look completo: cobertura, intensidad, paleta de colores y acabado. Esta prueba permite que el día del evento todo fluya sin sorpresas ni improvisaciones.',
+      'Utiliza productos específicos para novia: base de ultra larga duración, primers selladores, técnicas a prueba de lágrimas y fijación de 12 a 16 horas. El resultado es impecable en fotos, en video y en persona.',
+    ],
+    includes:['Prueba de maquillaje previa al evento','Aplicación el día de la boda','Productos de ultra larga duración','Técnicas a prueba de lágrimas','Retoque de emergencia incluido (kit)'],
+    forWho:'Novias que quieren verse perfectas en fotos y en persona, con un maquillaje que dure desde la ceremonia hasta el final del festejo.',
+    wa:'me+interesa+informaci%C3%B3n+sobre+maquillaje+para+novia',
+    hero:'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80',
+    gallery:[
+      {src:'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',h:480},
+      {src:'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80',h:360},
+      {src:'images/event-quince-2.jpg',h:420},
+      {src:'https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=800&q=80',h:400},
+      {src:'images/client-closeup.jpg',h:380},
+      {src:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80',h:440},
+    ]
+  },
+  'quinceañeras': {
+    cat:'Belleza & Eventos',
+    title:'Quinceañeras',
+    tagline:'La transformación que merece ese día especial.',
+    subtitle:'Tu quinceañera, perfecta de principio a fin',
+    desc:[
+      'Las quinceañeras son momentos que se fotografían, se recuerdan y se atesoran para siempre. Laura lo sabe, y por eso diseña cada look con el mismo nivel de cuidado que un maquillaje de novia: impecable, fotogénico y pensado para durar todo el evento.',
+      'El paquete para quinceañeras incluye maquillaje y peinado coordinado, pensados en conjunto para lograr una imagen armónica que complemente el vestido, los accesorios y el color del evento.',
+      'Se agenda una prueba previa donde la quinceañera y su familia pueden ver y aprobar el resultado antes del gran día. Cualquier ajuste se hace con tiempo para que todo esté exactamente como se soñó.',
+    ],
+    includes:['Prueba previa de maquillaje y peinado','Maquillaje de larga duración el día del evento','Peinado coordinado con el estilo del vestido','Productos fotogénicos y de alta fijación','Asesoría de accesorios para el cabello'],
+    forWho:'Quinceañeras y sus familias que quieren garantizar una imagen impecable y memorable para el gran festejo.',
+    wa:'me+interesa+informaci%C3%B3n+sobre+servicios+para+quincea%C3%B1era',
+    hero:'images/event-quince-2.jpg',
+    gallery:[
+      {src:'images/event-quince-2.jpg',h:480},
+      {src:'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',h:360},
+      {src:'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80',h:420},
+      {src:'images/client-closeup.jpg',h:400},
+      {src:'https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=800&q=80',h:380},
+      {src:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80',h:440},
+    ]
+  },
+  'lash-lifting': {
+    cat:'Belleza',
+    title:'Lash Lifting',
+    tagline:'Pestañas elevadas, mirada abierta, naturalidad total.',
+    subtitle:'La mirada que siempre quisiste, sin extensiones',
+    desc:[
+      'El lash lifting es un tratamiento que eleva y curva tus pestañas naturales desde la raíz, dándoles una apariencia más larga, abierta y expresiva sin necesidad de extensiones, rimel o rizador diario.',
+      'El proceso utiliza una solución especial que moldea la pestaña alrededor de un rulo, fijando la curvatura de forma semipermanente. El resultado dura entre 6 y 8 semanas y permite bañarse, lavarse la cara y hacer vida normal desde el día siguiente.',
+      'Laura también ofrece la opción de tintura de pestañas combinada con el lifting, para un efecto de rimel natural sin tener que aplicar ningún producto diariamente.',
+    ],
+    includes:['Limpieza y preparación de pestañas','Aplicación de la solución de lifting','Rizado y fijación con rulo personalizado','Tintura de pestañas (opcional)','Sérum nutritivo post-tratamiento'],
+    forWho:'Para quienes quieren abrir y realzar su mirada de forma natural y duradera, sin el mantenimiento de las extensiones.',
+    wa:'me+interesa+agendar+un+servicio+de+lash+lifting',
+    hero:'images/work-7-brows.jpg',
+    gallery:[
+      {src:'images/work-7-brows.jpg',h:460},
+      {src:'images/client-closeup.jpg',h:380},
+      {src:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80',h:420},
+      {src:'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80',h:400},
+      {src:'images/event-quince-2.jpg',h:360},
+      {src:'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',h:440},
+    ]
+  },
+  'pigmentacion-cejas': {
+    cat:'Pigmentación',
+    title:'Pigmentación de Cejas',
+    tagline:'Cejas definidas, simétricas y sin esfuerzo diario.',
+    subtitle:'La ceja perfecta, todos los días',
+    desc:[
+      'Las cejas enmarcan el rostro y definen la expresión. Una pigmentación bien hecha puede transformar completamente la armonía facial sin que nadie note que es un procedimiento estético: simplemente se ven cejas perfectas.',
+      'Laura trabaja con técnicas de micropigmentación que simulan trazos de pelo o sombra, dependiendo del resultado deseado. El proceso incluye un diseño previo donde se define la forma ideal para tu rostro antes de aplicar cualquier pigmento.',
+      'La duración del resultado es de 1 a 3 años dependiendo de la piel y el cuidado posterior. Se requiere una sesión de retoque a las 4-6 semanas para perfeccionar el resultado inicial.',
+    ],
+    includes:['Diseño digital de la forma ideal para tu rostro','Aplicación de anestesia tópica','Pigmentación con técnica de pelo o sombra','Cuidados post-procedimiento','Retoque a las 4-6 semanas (incluido)'],
+    forWho:'Para quienes tienen cejas escasas, asimétricas o simplemente quieren despertar con cejas perfectas sin maquillarse cada día.',
+    wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+cejas',
+    hero:'images/work-7-brows.jpg',
+    gallery:[
+      {src:'images/work-7-brows.jpg',h:480},
+      {src:'images/client-closeup.jpg',h:380},
+      {src:'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80',h:420},
+      {src:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80',h:400},
+      {src:'https://images.unsplash.com/photo-1586495777744-4e6232bf4bdf?auto=format&fit=crop&w=800&q=80',h:360},
+      {src:'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',h:440},
+    ]
+  },
+  'pigmentacion-ojos': {
+    cat:'Pigmentación',
+    title:'Pigmentación de Ojos',
+    tagline:'Mirada definida, sin delineador, cada mañana.',
+    subtitle:'Delineado permanente con precisión artística',
+    desc:[
+      'El delineado permanente de ojos es la solución para quienes quieren una mirada definida sin el tiempo que toma aplicar delineador a diario. Laura trabaja con agujas de micropigmentación de alta precisión que depositan el pigmento en la línea de las pestañas.',
+      'Se puede aplicar en párpado superior, inferior o ambos, con diferentes grosores y estilos según el efecto deseado: desde un trazo fino y natural hasta un look cat-eye más marcado.',
+      'El procedimiento se realiza con anestesia tópica para mayor comodidad. La recuperación es de 3 a 5 días de leve inflamación y el resultado final se estabiliza después del retoque a las 4-6 semanas.',
+    ],
+    includes:['Diseño y definición del trazo','Anestesia tópica para mayor comodidad','Pigmentación con técnica de precisión','Instrucciones de cuidado post-procedimiento','Sesión de retoque incluida'],
+    forWho:'Para quienes usan delineador todos los días y quieren simplificar su rutina sin perder definición en la mirada.',
+    wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+ojos',
+    hero:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1400&q=80',
+    gallery:[
+      {src:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80',h:460},
+      {src:'images/work-7-brows.jpg',h:380},
+      {src:'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80',h:420},
+      {src:'images/client-closeup.jpg',h:400},
+      {src:'https://images.unsplash.com/photo-1586495777744-4e6232bf4bdf?auto=format&fit=crop&w=800&q=80',h:360},
+      {src:'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',h:440},
+    ]
+  },
+  'pigmentacion-labios': {
+    cat:'Pigmentación',
+    title:'Pigmentación de Labios',
+    tagline:'Color y definición en tus labios, todo el día.',
+    subtitle:'Labios perfectos sin necesidad de labial',
+    desc:[
+      'La pigmentación de labios consiste en depositar pigmento de forma semipermanente en el contorno y/o el cuerpo del labio, logrando un efecto de color natural, buen volumen visual y una forma definida que dura meses.',
+      'Laura trabaja con paletas de pigmentos especialmente formulados para labios, en tonos que van desde el rosa natural hasta rojos y nudes más intensos. El diseño previo es clave para lograr una forma simétrica y armoniosa con el resto del rostro.',
+      'El resultado puede durar entre 1 y 2 años. La piel se recupera en 5 a 7 días y el color se suaviza ligeramente después de la cicatrización, llegando a su tono definitivo después del retoque.',
+    ],
+    includes:['Consulta y diseño de la forma del labio','Aplicación de anestesia tópica','Pigmentación con colores personalizados','Cuidados post-procedimiento','Sesión de retoque a las 4-6 semanas'],
+    forWho:'Para quienes quieren labios con color y definición permanente, o quienes han perdido pigmentación natural en el contorno del labio.',
+    wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+labios',
+    hero:'https://images.unsplash.com/photo-1586495777744-4e6232bf4bdf?auto=format&fit=crop&w=1400&q=80',
+    gallery:[
+      {src:'https://images.unsplash.com/photo-1586495777744-4e6232bf4bdf?auto=format&fit=crop&w=800&q=80',h:460},
+      {src:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80',h:380},
+      {src:'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80',h:420},
+      {src:'images/work-7-brows.jpg',h:400},
+      {src:'images/client-closeup.jpg',h:360},
+      {src:'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',h:440},
+    ]
+  },
+
+  /* CUIDADO PERSONAL */
+  'unas': {
+    cat:'Cuidado Personal',
+    title:'Uñas',
+    tagline:'Manos y uñas con acabado de salón.',
+    subtitle:'Nail art y manicure profesional',
+    desc:[
+      'El servicio de uñas en el estudio incluye manicure clásico, semipermanente (gel) y nail art para quienes quieren llevar un diseño personalizado y especial. Todos los productos utilizados son de calidad profesional y libre de componentes agresivos.',
+      'Laura y su equipo trabajan con una amplia paleta de colores y una selección de diseños que van desde el minimalismo elegante hasta propuestas más elaboradas y artísticas, siempre con un acabado impecable.',
+      'El semipermanente dura entre 2 y 3 semanas sin astillarse, y el proceso de remoción se hace con técnica que respeta la uña natural. También se realizan tratamientos de nutrición para uñas débiles o quebradizas.',
+    ],
+    includes:['Limpieza y preparación de la uña','Manicure clásico o semipermanente','Nail art a elección (opcional)','Productos profesionales libres de tóxicos','Tratamiento de nutrición (opcional)'],
+    forWho:'Para quienes quieren uñas cuidadas, con color duradero o diseños creativos que reflejen su personalidad.',
+    wa:'me+interesa+agendar+un+servicio+de+u%C3%B1as',
+    hero:'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=1400&q=80',
+    gallery:[
+      {src:'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=800&q=80',h:460},
+      {src:'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=800&q=80',h:380},
+      {src:'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80',h:420},
+      {src:'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80',h:400},
+      {src:'images/client-closeup.jpg',h:360},
+      {src:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80',h:440},
+    ]
+  },
+  'pedicure': {
+    cat:'Cuidado Personal',
+    title:'Pedicure',
+    tagline:'Pies suaves, cuidados y bien presentados.',
+    subtitle:'Cuidado completo para tus pies',
+    desc:[
+      'El pedicure que ofrece el estudio va más allá del esmalte: es un tratamiento completo de cuidado del pie que incluye exfoliación, hidratación profunda, tratamiento de cutículas y un acabado profesional que deja la piel suave y los pies en perfecto estado.',
+      'Se trabaja con productos hidratantes de primera calidad y técnicas que cuidan la piel sin lastimarla. El esmalte semipermanente disponible garantiza un resultado que dura semanas sin desprenderse.',
+      'También se realizan pedicures medicinales para piel muy seca, callosidades o uñas endurecidas, con tratamientos especializados según cada caso.',
+    ],
+    includes:['Remojo y ablandamiento de la piel','Eliminación de callosidades','Tratamiento de cutículas','Hidratación profunda de pies','Esmalte clásico o semipermanente a elección'],
+    forWho:'Para quienes quieren cuidar sus pies con un tratamiento completo y salir con un acabado impecable.',
+    wa:'me+interesa+agendar+un+servicio+de+pedicure',
+    hero:'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=1400&q=80',
+    gallery:[
+      {src:'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=800&q=80',h:460},
+      {src:'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=800&q=80',h:380},
+      {src:'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80',h:420},
+      {src:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80',h:400},
+      {src:'images/client-closeup.jpg',h:360},
+      {src:'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80',h:440},
+    ]
+  },
+  'depilaciones': {
+    cat:'Cuidado Personal',
+    title:'Depilaciones con Cera',
+    tagline:'Piel suave, sin vello, con durabilidad real.',
+    subtitle:'Depilación profesional de larga duración',
+    desc:[
+      'La depilación con cera elimina el vello desde la raíz, lo que significa que la piel permanece suave por más tiempo que con cualquier método de rasurado. En el estudio se trabaja con cera tibia y cera caliente según la zona y la sensibilidad de la piel.',
+      'Se realizan depilaciones de piernas, axilas, ingles, brazos, línea de bikini, zona del bigote y cejas. Cada sesión se realiza con aplicadores desechables para garantizar higiene total y se utilizan productos calmantes post-depilación para minimizar el enrojecimiento.',
+      'Con sesiones regulares, el vello tiende a crecer más delgado y escaso con el tiempo, haciendo que cada cita sea más fácil y duradera.',
+    ],
+    includes:['Depilación con cera tibia o caliente según zona','Aplicadores desechables por higiene','Crema calmante post-depilación','Aceite anti-inflamatorio para piel sensible','Asesoría de frecuencia de citas'],
+    forWho:'Para quienes buscan una depilación duradera, higiénica y con una técnica profesional que minimice la irritación.',
+    wa:'me+interesa+agendar+un+servicio+de+depilaci%C3%B3n',
+    hero:'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1400&q=80',
+    gallery:[
+      {src:'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80',h:460},
+      {src:'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=800&q=80',h:380},
+      {src:'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=800&q=80',h:420},
+      {src:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80',h:400},
+      {src:'images/client-closeup.jpg',h:360},
+      {src:'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80',h:440},
+    ]
+  },
+  'venta-producto': {
+    cat:'Productos',
+    title:'Venta de Producto',
+    tagline:'Lleva el cuidado del estudio a tu casa.',
+    subtitle:'Productos profesionales recomendados por Laura',
+    desc:[
+      'En el estudio encontrarás una selección cuidadosa de productos profesionales que Laura usa en sus servicios y que recomienda para el mantenimiento en casa. No son productos genéricos: son los mismos que garantizan los resultados que ves en el salón.',
+      'La línea disponible incluye shampoos y acondicionadores para cabello teñido, tratado o rizado; mascarillas de hidratación profunda; protectores térmicos; sérum de brillo; y productos específicos para post-alisado, post-color y cuidado de rizos.',
+      'Al comprar en el estudio recibes asesoría de Laura sobre cómo usar cada producto correctamente según tu tipo de cabello, maximizando el resultado y prolongando el efecto de cada tratamiento.',
+    ],
+    includes:['Asesoría personalizada de producto','Shampoos y acondicionadores profesionales','Mascarillas y tratamientos de profundidad','Protectores térmicos y sérums de brillo','Productos específicos post-tratamiento'],
+    forWho:'Para clientas del estudio que quieren mantener sus resultados en casa, o cualquier persona que busque productos de calidad profesional.',
+    wa:'me+interesa+consultar+productos+disponibles',
+    hero:'https://images.unsplash.com/photo-1522338242992-e1a54906a8da?auto=format&fit=crop&w=1400&q=80',
+    gallery:[
+      {src:'https://images.unsplash.com/photo-1522338242992-e1a54906a8da?auto=format&fit=crop&w=800&q=80',h:460},
+      {src:'images/work-5.jpg',h:380},
+      {src:'images/work-3.jpg',h:420},
+      {src:'images/work-6.jpg',h:400},
+      {src:'https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=800&q=80',h:360},
+      {src:'images/work-2.jpg',h:440},
+    ]
+  },
+};
+
+/* ── LOAD ─────────────────────────────────────────────────────── */
+const slug = new URLSearchParams(window.location.search).get('id') || '';
+const svc = SERVICES[slug];
+
+if(!svc){
+  // fallback: redirect home if unknown slug
+  window.location.href = 'index.html#services';
+} else {
+  document.title = svc.title + ' · Laura Zapien Studio';
+
+  // hero
+  const heroBg = document.getElementById('hero-bg');
+  if(svc.hero.startsWith('http')){
+    heroBg.style.backgroundImage = `url('${svc.hero}')`;
+  } else {
+    heroBg.style.backgroundImage = `url('${svc.hero}')`;
+  }
+  document.getElementById('svc-cat').textContent = svc.cat;
+  document.getElementById('svc-title').textContent = svc.title;
+  document.getElementById('svc-tagline').textContent = svc.tagline;
+
+  // body
+  document.getElementById('svc-subtitle').textContent = svc.subtitle;
+  const descEl = document.getElementById('svc-desc');
+  svc.desc.forEach(p => { descEl.insertAdjacentHTML('beforeend', `<p>${p}</p>`); });
+
+  // includes
+  const incEl = document.getElementById('svc-includes');
+  svc.includes.forEach(item => {
+    incEl.insertAdjacentHTML('beforeend', `
+      <li class="include-item">
+        <i data-lucide="check" class="w-4 h-4 text-rosegold shrink-0 mt-0.5"></i>
+        <span class="text-ink/70 text-sm font-light">${item}</span>
+      </li>`);
+  });
+
+  document.getElementById('svc-for').textContent = svc.forWho;
+
+  const waUrl = WA_BASE + svc.wa;
+  document.getElementById('svc-wa').href = waUrl;
+  document.getElementById('cta-wa').href = waUrl;
+  document.getElementById('cta-title').textContent = '¿Lista para tu ' + svc.title.toLowerCase() + '?';
+
+  // gallery
+  const galEl = document.getElementById('svc-gallery');
+  svc.gallery.forEach(img => {
+    galEl.insertAdjacentHTML('beforeend', `
+      <div class="gtile" onclick="openLB('${img.src}')">
+        <img src="${img.src}" style="height:${img.h}px" alt="${svc.title}">
+      </div>`);
+  });
+
+  lucide.createIcons();
+
+  // hero parallax hint
+  setTimeout(()=>{ heroBg.style.transform='scale(1)'; }, 100);
+}
+
+/* ── LIGHTBOX ─────────────────────────────────────────────────── */
+const lb = document.getElementById('lightbox'), lbImg = document.getElementById('lb-img');
+function openLB(src){ lbImg.src=src; lb.classList.remove('hidden'); lb.classList.add('flex'); requestAnimationFrame(()=>lb.classList.add('is-open')); }
+function closeLB(){ lb.classList.remove('is-open'); setTimeout(()=>{ lb.classList.add('hidden'); lb.classList.remove('flex'); },350); }
+document.getElementById('lb-close').addEventListener('click', closeLB);
+lb.addEventListener('click', e=>{ if(e.target===lb) closeLB(); });
+
+/* ── GSAP ─────────────────────────────────────────────────────── */
+gsap.registerPlugin(ScrollTrigger);
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!reduceMotion){
+  function batch(sel,vars){
+    gsap.utils.toArray(sel).forEach(el=>{
+      gsap.fromTo(el, vars.from, {...vars.to, scrollTrigger:{trigger:el,start:'top 88%'}});
+    });
+  }
+  batch('.reveal',{from:{opacity:0,y:40},to:{opacity:1,y:0,duration:1,ease:'power3.out'}});
+  batch('.reveal-l',{from:{opacity:0,x:-50},to:{opacity:1,x:0,duration:1.1,ease:'power3.out'}});
+  batch('.reveal-r',{from:{opacity:0,x:50},to:{opacity:1,x:0,duration:1.1,ease:'power3.out'}});
+
+  gsap.utils.toArray('.gtile').forEach((el,i)=>{
+    gsap.fromTo(el,{opacity:0,y:30},{opacity:1,y:0,duration:.7,delay:(i%3)*.1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 92%'}});
+  });
+} else {
+  gsap.set('.reveal,.reveal-l,.reveal-r,.gtile',{opacity:1,y:0,x:0});
+}
+</script>
+</body>
+</html>
