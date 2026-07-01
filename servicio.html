@@ -563,28 +563,68 @@ const SERVICES = {
   },
 };
 
+/* ── HELPERS ──────────────────────────────────────────────────── */
+// Probe a list of image URLs and return those that load successfully.
+function probeImages(urls){
+  return Promise.all(urls.map(url =>
+    new Promise(resolve => {
+      const i = new Image();
+      i.onload  = () => resolve(url);
+      i.onerror = () => resolve(null);
+      i.src = url;
+    })
+  )).then(results => results.filter(Boolean));
+}
+
+// Common filenames to try in each service folder.
+const COMMON_NAMES = [
+  '1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg',
+  '9.jpg','10.jpg','11.jpg','12.jpg',
+  '1.jpeg','2.jpeg','3.jpeg','4.jpeg','5.jpeg','6.jpeg',
+  '1.png','2.png','3.png','4.png','5.png','6.png',
+  '1.webp','2.webp','3.webp','4.webp','5.webp','6.webp',
+];
+
+function addGalleryTile(galEl, src, title){
+  galEl.insertAdjacentHTML('beforeend', `
+    <div class="gtile" onclick="openLB('${src}')">
+      <img src="${src}" alt="${title}" style="min-height:200px;object-fit:cover;">
+    </div>`);
+}
+
+function renderGallery(images, fallback, title){
+  const galEl = document.getElementById('svc-gallery');
+  if(images.length){
+    images.forEach(src => addGalleryTile(galEl, src, title));
+  } else {
+    // no local photos yet — use fallback placeholder gallery
+    fallback.forEach(img => addGalleryTile(galEl, img.src, title));
+  }
+}
+
 /* ── LOAD ─────────────────────────────────────────────────────── */
 const slug = new URLSearchParams(window.location.search).get('id') || '';
 const svc = SERVICES[slug];
 
 if(!svc){
-  // fallback: redirect home if unknown slug
   window.location.href = 'index.html#services';
 } else {
   document.title = svc.title + ' · Laura Zapien Studio';
 
-  // hero
+  // hero: try local hero.jpg first, fallback to svc.hero
   const heroBg = document.getElementById('hero-bg');
-  if(svc.hero.startsWith('http')){
-    heroBg.style.backgroundImage = `url('${svc.hero}')`;
-  } else {
-    heroBg.style.backgroundImage = `url('${svc.hero}')`;
-  }
+  const localHero = `images/${slug}/hero.jpg`;
+  probeImages([localHero]).then(found => {
+    heroBg.style.backgroundImage = found.length
+      ? `url('${localHero}')`
+      : `url('${svc.hero}')`;
+  });
+
   document.getElementById('svc-cat').textContent = svc.cat;
   document.getElementById('svc-title').textContent = svc.title;
   document.getElementById('svc-tagline').textContent = svc.tagline;
 
-  // body
+  // body text
   document.getElementById('svc-subtitle').textContent = svc.subtitle;
   const descEl = document.getElementById('svc-desc');
   svc.desc.forEach(p => { descEl.insertAdjacentHTML('beforeend', `<p>${p}</p>`); });
@@ -600,25 +640,28 @@ if(!svc){
   });
 
   document.getElementById('svc-for').textContent = svc.forWho;
-
   const waUrl = WA_BASE + svc.wa;
   document.getElementById('svc-wa').href = waUrl;
   document.getElementById('cta-wa').href = waUrl;
   document.getElementById('cta-title').textContent = '¿Lista para tu ' + svc.title.toLowerCase() + '?';
 
-  // gallery
-  const galEl = document.getElementById('svc-gallery');
-  svc.gallery.forEach(img => {
-    galEl.insertAdjacentHTML('beforeend', `
-      <div class="gtile" onclick="openLB('${img.src}')">
-        <img src="${img.src}" style="height:${img.h}px" alt="${svc.title}">
-      </div>`);
+  // gallery: probe local folder first, then fallback
+  const localCandidates = COMMON_NAMES.map(n => `images/${slug}/${n}`);
+  probeImages(localCandidates).then(found => {
+    renderGallery(found, svc.gallery, svc.title);
+    lucide.createIcons();
+    // fire GSAP after images are in DOM
+    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      gsap.utils.toArray('.gtile').forEach((el,i)=>{
+        gsap.fromTo(el,{opacity:0,y:30},{opacity:1,y:0,duration:.7,delay:(i%3)*.1,ease:'power3.out',
+          scrollTrigger:{trigger:el,start:'top 92%'}});
+      });
+    } else {
+      gsap.set('.gtile',{opacity:1,y:0});
+    }
   });
 
   lucide.createIcons();
-
-  // hero parallax hint
-  setTimeout(()=>{ heroBg.style.transform='scale(1)'; }, 100);
 }
 
 /* ── LIGHTBOX ─────────────────────────────────────────────────── */
@@ -640,10 +683,7 @@ if(!reduceMotion){
   batch('.reveal',{from:{opacity:0,y:40},to:{opacity:1,y:0,duration:1,ease:'power3.out'}});
   batch('.reveal-l',{from:{opacity:0,x:-50},to:{opacity:1,x:0,duration:1.1,ease:'power3.out'}});
   batch('.reveal-r',{from:{opacity:0,x:50},to:{opacity:1,x:0,duration:1.1,ease:'power3.out'}});
-
-  gsap.utils.toArray('.gtile').forEach((el,i)=>{
-    gsap.fromTo(el,{opacity:0,y:30},{opacity:1,y:0,duration:.7,delay:(i%3)*.1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 92%'}});
-  });
+  // .gtile animations are handled inside the probeImages callback above
 } else {
   gsap.set('.reveal,.reveal-l,.reveal-r,.gtile',{opacity:1,y:0,x:0});
 }
