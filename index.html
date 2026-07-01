@@ -30,9 +30,7 @@ tailwind.config = {
         ink: '#1C1815',
         softgray: '#9C948B',
       },
-      letterSpacing: {
-        wides: '0.28em',
-      }
+      letterSpacing: { wides: '0.28em' }
     }
   }
 }
@@ -50,15 +48,12 @@ tailwind.config = {
   .eyebrow{ font-size:.72rem; letter-spacing:.32em; text-transform:uppercase; color:var(--copper); font-weight:600; }
   .gold-line{ height:1px; background:linear-gradient(90deg,transparent,var(--rosegold),transparent); }
 
-  /* progress bar */
   #progress{ position:fixed; top:0; left:0; height:2px; width:0%; z-index:120;
     background:linear-gradient(90deg,var(--champagne),var(--rosegold),var(--copper)); }
 
-  /* glass nav */
   .glass{ background:rgba(251,248,244,.72); backdrop-filter:blur(18px) saturate(140%);
     -webkit-backdrop-filter:blur(18px) saturate(140%); border-bottom:1px solid rgba(183,110,121,.12); }
 
-  /* hero */
   .hero-img{ background-size:cover; background-position:center; }
   .hero-overlay{ background:linear-gradient(180deg,rgba(28,24,21,.55) 0%,rgba(28,24,21,.35) 40%,rgba(28,24,21,.7) 100%); }
 
@@ -76,9 +71,16 @@ tailwind.config = {
   .card-lift{ transition:transform .55s cubic-bezier(.2,.8,.2,1), box-shadow .55s ease; }
   .card-lift:hover{ transform:translateY(-10px); box-shadow:0 30px 60px -30px rgba(28,24,21,.35); }
 
+  /* service visual cards */
+  .svc-vis{ transition:.5s cubic-bezier(.2,.8,.2,1); }
+  .svc-vis:hover{ transform:translateY(-6px); box-shadow:0 24px 48px -20px rgba(176,106,74,.28); }
+  .svc-vis:hover .svc-vis-img{ transform:scale(1.06); }
+  .svc-vis-img{ transition:transform .8s cubic-bezier(.2,.8,.2,1); }
+  .svc-vis:hover .svc-vis-overlay{ opacity:1; }
+  .svc-vis-overlay{ opacity:0; transition:opacity .4s; }
+
+  /* old svc-card kept for mobile numbered list (services section) */
   .svc-card{ transition:.5s cubic-bezier(.2,.8,.2,1); }
-  .svc-card:hover .svc-ic{ background:var(--rosegold); color:#fff; transform:rotate(-6deg) scale(1.05); }
-  .svc-ic{ transition:.5s cubic-bezier(.2,.8,.2,1); }
   .svc-num{ display:inline-block; transition:color .4s cubic-bezier(.16,1,.3,1), transform .4s cubic-bezier(.16,1,.3,1); }
   .svc-text{ transition:transform .4s cubic-bezier(.16,1,.3,1); }
   .svc-card:hover .svc-num{ color:var(--copper); transform:translateX(2px); }
@@ -88,7 +90,11 @@ tailwind.config = {
     .svc-card:hover{ transform:translateY(-8px); border-color:rgba(183,110,121,.4); background:#fff; box-shadow:0 28px 50px -28px rgba(176,106,74,.3); }
   }
 
-  /* before-after slider */
+  /* course modality cards */
+  .course-card{ border:1px solid rgba(183,110,121,.18); background:rgba(251,248,244,.04); transition:.45s cubic-bezier(.2,.8,.2,1); }
+  .course-card:hover{ border-color:rgba(183,110,121,.5); background:rgba(251,248,244,.08); transform:translateY(-4px); }
+
+  /* before-after */
   .ba-wrap{ position:relative; overflow:hidden; user-select:none; touch-action:none; }
   .ba-after{ position:absolute; inset:0; overflow:hidden; width:50%; }
   .ba-handle{ position:absolute; top:0; bottom:0; left:50%; width:2px; background:#fff; transform:translateX(-50%); }
@@ -98,7 +104,7 @@ tailwind.config = {
   .ba-tag{ position:absolute; bottom:18px; font-size:.65rem; letter-spacing:.25em; text-transform:uppercase;
     padding:6px 14px; background:rgba(28,24,21,.6); color:#fff; backdrop-filter:blur(6px); }
 
-  /* masonry */
+  /* masonry gallery */
   .masonry{ column-count:3; column-gap:1.25rem; }
   @media(max-width:1024px){ .masonry{column-count:2} }
   @media(max-width:640px){ .masonry{column-count:1} }
@@ -126,7 +132,6 @@ tailwind.config = {
   .reveal{ opacity:0; transform:translateY(40px); }
   .reveal-l{ opacity:0; transform:translateX(-50px); }
   .reveal-r{ opacity:0; transform:translateX(50px); }
-  .blur-rev{ opacity:0; filter:blur(14px); transform:translateY(20px); }
 
   .btn-primary{ background:var(--ink); color:var(--ivory); transition:.45s; position:relative; overflow:hidden; }
   .btn-primary span{ position:relative; z-index:2; }
@@ -136,6 +141,9 @@ tailwind.config = {
 
   .btn-ghost{ border:1px solid rgba(251,248,244,.6); color:#fff; transition:.45s; }
   .btn-ghost:hover{ background:rgba(251,248,244,.12); border-color:#fff; }
+
+  .btn-wa{ background:#25D366; color:#fff; transition:opacity .3s; }
+  .btn-wa:hover{ opacity:.88; }
 
   .link-underline{ position:relative; }
   .link-underline::after{ content:''; position:absolute; left:0; bottom:-3px; height:1px; width:0; background:var(--rosegold); transition:width .4s; }
@@ -153,9 +161,16 @@ tailwind.config = {
   .cf-sent #cf-success{ opacity:1; pointer-events:auto; }
   .cf-sent #cf-success i{ transform:scale(1); }
 
+  /* placeholder gradient bg for missing images */
+  .img-ph{ background:linear-gradient(135deg,var(--sand) 0%,var(--beige) 50%,var(--champagne) 100%); }
+
   @media (prefers-reduced-motion: reduce){
     *, *::before, *::after{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
   }
+
+  /* mobile nav drawer */
+  #mob-menu{ transition:transform .4s cubic-bezier(.2,.8,.2,1); }
+  #mob-menu.open{ transform:translateX(0); }
 </style>
 </head>
 <body class="font-body antialiased">
@@ -170,26 +185,46 @@ window.scrollTo(0,0);
 <nav class="glass fixed top-0 inset-x-0 z-[100]">
   <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
     <a href="#hero" class="font-display text-xl tracking-wide">Laura&nbsp;<span class="text-rosegold italic">Zapien</span></a>
-    <div class="hidden lg:flex items-center gap-9 text-[.82rem] tracking-wide text-ink/80">
+    <div class="hidden lg:flex items-center gap-7 text-[.78rem] tracking-wide text-ink/80">
       <a href="#about" class="link-underline">Sobre Laura</a>
       <a href="#services" class="link-underline">Servicios</a>
-      <a href="#transform" class="link-underline">Transformaciones</a>
+      <a href="#cabello" class="link-underline">Cabello</a>
       <a href="#gallery" class="link-underline">Galería</a>
+      <a href="#belleza" class="link-underline">Belleza</a>
       <a href="#courses" class="link-underline">Cursos</a>
+      <a href="#productos" class="link-underline">Productos</a>
       <a href="#contact" class="link-underline">Contacto</a>
     </div>
-    <a href="#contact" class="btn-primary px-6 py-3 text-[.72rem] tracking-wides uppercase"><span>Agenda tu cita</span></a>
+    <div class="flex items-center gap-4">
+      <a href="#contact" class="btn-primary px-6 py-3 text-[.72rem] tracking-wides uppercase hidden sm:inline-flex"><span>Agenda tu cita</span></a>
+      <button id="mob-toggle" class="lg:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5" aria-label="Menú">
+        <span class="w-6 h-[1.5px] bg-ink transition-all"></span>
+        <span class="w-6 h-[1.5px] bg-ink transition-all"></span>
+        <span class="w-4 h-[1.5px] bg-ink transition-all"></span>
+      </button>
+    </div>
   </div>
+  <!-- mobile drawer -->
+  <div id="mob-menu" class="lg:hidden fixed inset-y-0 right-0 w-72 bg-ivory z-[110] shadow-2xl translate-x-full flex flex-col pt-24 pb-10 px-8 gap-6 text-base">
+    <a href="#about" class="link-underline py-1" onclick="closeMob()">Sobre Laura</a>
+    <a href="#services" class="link-underline py-1" onclick="closeMob()">Servicios</a>
+    <a href="#cabello" class="link-underline py-1" onclick="closeMob()">Cabello</a>
+    <a href="#gallery" class="link-underline py-1" onclick="closeMob()">Galería</a>
+    <a href="#belleza" class="link-underline py-1" onclick="closeMob()">Belleza Integral</a>
+    <a href="#courses" class="link-underline py-1" onclick="closeMob()">Cursos</a>
+    <a href="#productos" class="link-underline py-1" onclick="closeMob()">Productos</a>
+    <a href="#contact" class="link-underline py-1" onclick="closeMob()">Contacto</a>
+    <a href="#contact" class="btn-primary px-6 py-3 text-[.72rem] tracking-wides uppercase text-center mt-4" onclick="closeMob()"><span>Agenda tu cita</span></a>
+  </div>
+  <div id="mob-backdrop" class="lg:hidden fixed inset-0 bg-ink/30 z-[105] hidden" onclick="closeMob()"></div>
 </nav>
 
 <!-- HERO -->
 <header id="hero" class="relative h-screen w-full flex items-center justify-center overflow-hidden">
   <div class="hero-img absolute inset-0 scale-105" style="background-image:url('images/work-2.jpg')"></div>
   <div class="hero-overlay absolute inset-0"></div>
-
   <div class="absolute top-1/4 left-[8%] w-24 h-24 rounded-full border border-white/20 float hidden md:block"></div>
   <div class="absolute bottom-1/3 right-[10%] w-16 h-16 rounded-full border border-rosegold/40 float hidden md:block" style="animation-delay:1.5s"></div>
-
   <div class="relative z-10 text-center px-6 max-w-4xl">
     <p class="hero-el eyebrow !text-champagne mb-7">Estudio de Belleza · Estado de México</p>
     <h1 class="hero-el font-display text-white text-6xl md:text-8xl leading-[0.95] mb-5">Laura Zapien</h1>
@@ -200,7 +235,6 @@ window.scrollTo(0,0);
       <a href="#gallery" class="btn-ghost px-9 py-4 text-[.72rem] tracking-wides uppercase">Ver trabajos</a>
     </div>
   </div>
-
   <div class="absolute bottom-9 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
     <span class="text-white/60 text-[.6rem] tracking-wides uppercase">Scroll</span>
     <div class="w-[26px] h-[42px] rounded-full border border-white/40 flex justify-center pt-2">
@@ -225,7 +259,7 @@ window.scrollTo(0,0);
       <div class="gold-line w-24 mb-8"></div>
       <p class="text-ink/70 leading-relaxed mb-5 font-light">Durante más de dieciocho años, Laura ha dedicado su vida a un oficio que entiende como un arte. Cada cabello que toca, cada rostro que maquilla y cada imagen que diseña nacen de la misma convicción: la belleza no se impone, se descubre.</p>
       <p class="text-ink/70 leading-relaxed mb-5 font-light">Su pasión por la colorimetría y el diseño de imagen la ha llevado a especializarse en transformaciones que respetan la esencia de cada persona. No se trata de cambiar a alguien, sino de hacer visible aquello que ya brillaba por dentro.</p>
-      <p class="text-ink/70 leading-relaxed mb-9 font-light">En su estudio, la atención es siempre personalizada. Desde un hair makeover hasta el maquillaje de una novia, pasando por sus cursos presenciales para estilistas, Laura comparte una técnica madura y una sensibilidad que solo dan los años.</p>
+      <p class="text-ink/70 leading-relaxed mb-9 font-light">En su estudio, la atención es siempre personalizada. Desde un hair makeover hasta el maquillaje de una novia, pasando por sus cursos para estilistas, Laura comparte una técnica madura y una sensibilidad que solo dan los años.</p>
       <div class="grid grid-cols-2 gap-6 text-sm">
         <div class="flex items-center gap-3"><i data-lucide="palette" class="w-5 h-5 text-rosegold"></i><span class="text-ink/70">Colorimetría experta</span></div>
         <div class="flex items-center gap-3"><i data-lucide="sparkles" class="w-5 h-5 text-rosegold"></i><span class="text-ink/70">Diseño de imagen</span></div>
@@ -239,24 +273,88 @@ window.scrollTo(0,0);
 <!-- SERVICES -->
 <section id="services" class="py-28 md:py-36 bg-sand/50">
   <div class="max-w-7xl mx-auto px-6 lg:px-10">
-    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+    <div class="text-center max-w-2xl mx-auto mb-5 reveal">
       <p class="eyebrow mb-5">Servicios</p>
       <h2 class="font-display text-4xl md:text-5xl leading-tight mb-6">Una experiencia hecha a tu medida</h2>
-      <p class="text-ink/60 font-light">Cada servicio se diseña a partir de un diagnóstico personalizado para lograr resultados que se sienten tan auténticos como elegantes.</p>
+      <p class="text-ink/60 font-light">Cada servicio parte de un diagnóstico personalizado para resultados que se sienten tan auténticos como elegantes.</p>
     </div>
-    <div class="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-5">
-      <!-- cards injected -->
-      <div id="svc-grid" class="contents"></div>
+
+    <!-- Category: Cabello -->
+    <div class="mb-16">
+      <div class="flex items-center gap-4 mb-8 mt-14">
+        <span class="eyebrow">Cabello</span>
+        <div class="flex-1 h-px bg-rosegold/20"></div>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="svc-cabello"></div>
+    </div>
+
+    <!-- Category: Belleza & Eventos -->
+    <div class="mb-16">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="eyebrow">Belleza &amp; Eventos</span>
+        <div class="flex-1 h-px bg-rosegold/20"></div>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="svc-belleza-grid"></div>
+    </div>
+
+    <!-- Category: Cuidado Personal -->
+    <div>
+      <div class="flex items-center gap-4 mb-8">
+        <span class="eyebrow">Cuidado Personal</span>
+        <div class="flex-1 h-px bg-rosegold/20"></div>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="svc-cuidado"></div>
     </div>
   </div>
 </section>
 
-<!-- TRANSFORMATIONS -->
-<section id="transform" class="py-28 md:py-40 max-w-7xl mx-auto px-6 lg:px-10">
+<!-- CABELLO — Transformaciones de Cabello -->
+<section id="cabello" class="py-28 md:py-40 max-w-7xl mx-auto px-6 lg:px-10">
   <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-    <p class="eyebrow mb-5">Transformaciones</p>
-    <h2 class="font-display text-4xl md:text-5xl leading-tight mb-6">Antes y después</h2>
-    <p class="text-ink/60 font-light">Arrastra el control para descubrir la transformación. Resultados reales del estudio.</p>
+    <p class="eyebrow mb-5">Especialidad</p>
+    <h2 class="font-display text-4xl md:text-5xl leading-tight mb-6">Transformaciones de Cabello</h2>
+    <p class="text-ink/60 font-light">Cada transformación capilar se trabaja de forma personalizada según tu tipo de cabello, tono natural y estilo de vida. Colorimetría, textura y salud siempre en equilibrio.</p>
+  </div>
+
+  <!-- Hair service highlights -->
+  <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4 mb-20 reveal">
+    <div class="lg:col-span-2 relative overflow-hidden group cursor-pointer" onclick="void(0)">
+      <img src="images/work-4.jpg" class="w-full h-72 lg:h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Color">
+      <div class="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent"></div>
+      <div class="absolute bottom-6 left-6">
+        <p class="eyebrow !text-champagne mb-1">Color</p>
+        <p class="font-display text-white text-2xl">Colorimetría experta</p>
+      </div>
+    </div>
+    <div class="lg:col-span-3 grid grid-cols-2 gap-4">
+      <div class="relative overflow-hidden group cursor-pointer">
+        <img src="images/work-6.jpg" class="w-full h-52 object-cover transition-transform duration-700 group-hover:scale-105" alt="Alaciado">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent"></div>
+        <div class="absolute bottom-4 left-4"><p class="font-display text-white text-lg">Alaciados</p></div>
+      </div>
+      <div class="relative overflow-hidden group cursor-pointer">
+        <img src="images/work-3.jpg" class="w-full h-52 object-cover transition-transform duration-700 group-hover:scale-105" alt="Balayage">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent"></div>
+        <div class="absolute bottom-4 left-4"><p class="font-display text-white text-lg">Balayage</p></div>
+      </div>
+      <div class="relative overflow-hidden group cursor-pointer">
+        <img src="images/work-5.jpg" class="w-full h-52 object-cover transition-transform duration-700 group-hover:scale-105" alt="Tratamientos">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent"></div>
+        <div class="absolute bottom-4 left-4"><p class="font-display text-white text-lg">Tratamientos</p></div>
+      </div>
+      <div class="relative overflow-hidden group cursor-pointer">
+        <img src="images/work-1.jpg" class="w-full h-52 object-cover transition-transform duration-700 group-hover:scale-105" alt="Rizos">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent"></div>
+        <div class="absolute bottom-4 left-4"><p class="font-display text-white text-lg">Rizos &amp; Ondas</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Before / After slider -->
+  <div class="text-center max-w-xl mx-auto mb-10 reveal">
+    <p class="eyebrow mb-4">Antes y Después</p>
+    <h3 class="font-display text-3xl md:text-4xl leading-tight mb-4">Before &amp; After</h3>
+    <p class="text-ink/60 font-light text-sm">Arrastra el control para descubrir la transformación. Resultados reales del estudio.</p>
   </div>
   <div class="reveal max-w-4xl mx-auto">
     <div class="ba-wrap aspect-[16/10] shadow-2xl" id="ba">
@@ -270,6 +368,9 @@ window.scrollTo(0,0);
         <div class="ba-grip"><i data-lucide="move-horizontal" class="w-5 h-5"></i></div>
       </div>
     </div>
+  </div>
+  <div class="text-center mt-10">
+    <a href="https://wa.me/525566568134?text=Hola%2C+me+interesa+agendar+una+transformaci%C3%B3n+de+cabello" target="_blank" class="inline-flex items-center gap-3 btn-wa px-8 py-4 text-[.72rem] tracking-wides uppercase"><i data-lucide="message-circle" class="w-4 h-4"></i> Agendar transformación</a>
   </div>
 </section>
 
@@ -285,8 +386,58 @@ window.scrollTo(0,0);
   </div>
 </section>
 
+<!-- BELLEZA INTEGRAL -->
+<section id="belleza" class="py-28 md:py-40 max-w-7xl mx-auto px-6 lg:px-10">
+  <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+    <p class="eyebrow mb-5">Belleza Integral</p>
+    <h2 class="font-display text-4xl md:text-5xl leading-tight mb-6">Belleza de pies a cabeza</h2>
+    <p class="text-ink/60 font-light">Servicios premium para eventos especiales, cuidado personal y belleza completa. Todo en un mismo lugar, con la firma de Laura.</p>
+  </div>
+
+  <!-- Maquillaje & Eventos highlight -->
+  <div class="grid lg:grid-cols-2 gap-10 items-center mb-20">
+    <div class="reveal-l space-y-5">
+      <p class="eyebrow">Maquillaje &amp; Eventos</p>
+      <h3 class="font-display text-3xl md:text-4xl leading-tight">El maquillaje que cuenta tu historia</h3>
+      <p class="text-ink/65 font-light leading-relaxed">Para cada ocasión especial, Laura crea un maquillaje que resiste y deslumbra. Novias, quinceañeras, eventos sociales y sesiones fotográficas: cada look está diseñado para ti.</p>
+      <ul class="space-y-3 text-sm text-ink/70">
+        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-rosegold shrink-0"></i>Maquillaje de novia social y civil</li>
+        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-rosegold shrink-0"></i>Quinceañeras con peinado incluido</li>
+        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-rosegold shrink-0"></i>Maquillaje artístico y editorial</li>
+        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-rosegold shrink-0"></i>Prueba previa de maquillaje disponible</li>
+      </ul>
+      <div class="flex flex-col sm:flex-row gap-3 pt-2">
+        <a href="https://wa.me/525566568134?text=Hola%2C+me+interesa+informaci%C3%B3n+sobre+maquillaje+para+novia" target="_blank" class="inline-flex items-center justify-center gap-2 btn-wa px-6 py-3 text-[.72rem] tracking-wides uppercase"><i data-lucide="message-circle" class="w-4 h-4"></i>Novias</a>
+        <a href="https://wa.me/525566568134?text=Hola%2C+me+interesa+informaci%C3%B3n+sobre+servicios+para+quincea%C3%B1era" target="_blank" class="inline-flex items-center justify-center gap-2 btn-wa px-6 py-3 text-[.72rem] tracking-wides uppercase"><i data-lucide="message-circle" class="w-4 h-4"></i>Quinceañeras</a>
+      </div>
+    </div>
+    <div class="reveal-r grid grid-cols-2 gap-4">
+      <img src="images/event-quince-2.jpg" class="w-full h-64 object-cover" alt="Quinceañera">
+      <img src="images/client-closeup.jpg" class="w-full h-64 object-cover mt-8" alt="Maquillaje">
+    </div>
+  </div>
+
+  <!-- Pigmentación & Microblading -->
+  <div class="bg-sand/60 border border-rosegold/10 p-8 md:p-12 mb-16 reveal">
+    <div class="text-center mb-10">
+      <p class="eyebrow mb-3">Pigmentación Permanente</p>
+      <h3 class="font-display text-3xl md:text-4xl leading-tight">Define tu mirada, de forma duradera</h3>
+    </div>
+    <div class="grid sm:grid-cols-3 gap-6" id="pigment-grid"></div>
+  </div>
+
+  <!-- Uñas, Pedicure, Depilaciones, Lash -->
+  <div class="reveal">
+    <div class="flex items-center gap-4 mb-8">
+      <span class="eyebrow">Cuidado &amp; Confort</span>
+      <div class="flex-1 h-px bg-rosegold/20"></div>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" id="cuidado-grid"></div>
+  </div>
+</section>
+
 <!-- PROCESS TIMELINE -->
-<section class="py-28 md:py-40 max-w-6xl mx-auto px-6 lg:px-10">
+<section class="py-28 md:py-40 max-w-6xl mx-auto px-6 lg:px-10 bg-sand/30">
   <div class="text-center max-w-2xl mx-auto mb-20 reveal">
     <p class="eyebrow mb-5">La experiencia</p>
     <h2 class="font-display text-4xl md:text-5xl leading-tight mb-6">Tu camino a la transformación</h2>
@@ -302,22 +453,77 @@ window.scrollTo(0,0);
   <div class="absolute -top-32 -right-24 w-96 h-96 rounded-full bg-rosegold/10 blur-3xl float"></div>
   <div class="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-copper/10 blur-3xl float" style="animation-delay:2s"></div>
   <div class="max-w-7xl mx-auto px-6 lg:px-10 relative">
-    <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+      <p class="eyebrow mb-5 !text-champagne">Cursos &amp; Formación</p>
+      <h2 class="font-display text-4xl md:text-5xl leading-tight mb-6">Comparte el oficio,<br>domina la técnica</h2>
+      <p class="text-ivory/65 font-light">Laura abre las puertas de su estudio a estilistas que buscan elevar su técnica. Tres modalidades para que aprendas a tu ritmo y estilo.</p>
+    </div>
+
+    <!-- Curso Alisado Progresivo -->
+    <div class="mb-20">
+      <div class="flex items-center gap-4 mb-8">
+        <div class="w-10 h-10 rounded-full border border-rosegold/40 flex items-center justify-center shrink-0">
+          <i data-lucide="wind" class="w-4 h-4 text-rosegold"></i>
+        </div>
+        <h3 class="font-display text-2xl md:text-3xl text-ivory">Curso de Alisado Progresivo</h3>
+        <div class="flex-1 h-px bg-rosegold/20"></div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-5" id="curso-alisado"></div>
+    </div>
+
+    <!-- Curso Lash Lifting -->
+    <div>
+      <div class="flex items-center gap-4 mb-8">
+        <div class="w-10 h-10 rounded-full border border-rosegold/40 flex items-center justify-center shrink-0">
+          <i data-lucide="eye" class="w-4 h-4 text-rosegold"></i>
+        </div>
+        <h3 class="font-display text-2xl md:text-3xl text-ivory">Curso de Lash Lifting</h3>
+        <div class="flex-1 h-px bg-rosegold/20"></div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-5" id="curso-lash"></div>
+    </div>
+
+    <div class="text-center mt-14">
+      <a href="https://wa.me/525566568134?text=Hola%2C+me+interesa+informaci%C3%B3n+sobre+los+cursos+disponibles" target="_blank" class="inline-flex items-center gap-3 bg-ivory text-ink px-8 py-4 text-[.72rem] tracking-wides uppercase hover:bg-champagne transition-colors"><i data-lucide="message-circle" class="w-4 h-4"></i> Consultar todos los cursos</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section id="productos" class="py-28 md:py-36 bg-sand/40">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
       <div class="reveal-l">
-        <p class="eyebrow mb-5 !text-champagne">Cursos & Clases</p>
-        <h2 class="font-display text-4xl md:text-5xl leading-tight mb-7">Comparte el oficio,<br>domina la técnica</h2>
-        <p class="text-ivory/70 font-light leading-relaxed mb-9">Laura abre las puertas de su estudio a estilistas que buscan elevar su técnica. Sus cursos presenciales combinan teoría sólida con práctica intensiva, en grupos reducidos donde cada detalle importa.</p>
-        <ul class="space-y-4 mb-10">
-          <li class="flex items-center gap-4"><i data-lucide="check" class="w-5 h-5 text-rosegold"></i><span class="text-ivory/80">Cursos presenciales en grupos reducidos</span></li>
-          <li class="flex items-center gap-4"><i data-lucide="check" class="w-5 h-5 text-rosegold"></i><span class="text-ivory/80">Aprendizaje 100% práctico</span></li>
-          <li class="flex items-center gap-4"><i data-lucide="check" class="w-5 h-5 text-rosegold"></i><span class="text-ivory/80">Técnicas profesionales de color y diseño</span></li>
-          <li class="flex items-center gap-4"><i data-lucide="check" class="w-5 h-5 text-rosegold"></i><span class="text-ivory/80">Dirigido a estilistas en crecimiento</span></li>
+        <p class="eyebrow mb-5">Venta de Productos</p>
+        <h2 class="font-display text-4xl md:text-5xl leading-tight mb-7">Lleva el estudio a casa</h2>
+        <div class="gold-line w-24 mb-8"></div>
+        <p class="text-ink/70 leading-relaxed mb-6 font-light">En el estudio encontrarás una selección de productos profesionales para mantener tus resultados entre citas. Shampoos, acondicionadores, tratamientos de brillo, mascarillas nutritivas y más.</p>
+        <ul class="space-y-4 mb-8 text-sm">
+          <li class="flex items-center gap-4"><i data-lucide="check-circle" class="w-5 h-5 text-rosegold shrink-0"></i><span class="text-ink/70">Productos para cuidado del cabello post-tratamiento</span></li>
+          <li class="flex items-center gap-4"><i data-lucide="check-circle" class="w-5 h-5 text-rosegold shrink-0"></i><span class="text-ink/70">Marcas profesionales recomendadas por Laura</span></li>
+          <li class="flex items-center gap-4"><i data-lucide="check-circle" class="w-5 h-5 text-rosegold shrink-0"></i><span class="text-ink/70">Disponibles en el salón o por WhatsApp</span></li>
+          <li class="flex items-center gap-4"><i data-lucide="check-circle" class="w-5 h-5 text-rosegold shrink-0"></i><span class="text-ink/70">Asesoría personalizada incluida con tu compra</span></li>
         </ul>
-        <a href="#contact" class="inline-flex items-center gap-3 bg-ivory text-ink px-8 py-4 text-[.72rem] tracking-wides uppercase hover:bg-champagne transition-colors">Solicitar información <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        <a href="https://wa.me/525566568134?text=Hola%2C+me+interesa+consultar+productos+disponibles" target="_blank" class="inline-flex items-center gap-3 btn-wa px-8 py-4 text-[.72rem] tracking-wides uppercase"><i data-lucide="message-circle" class="w-4 h-4"></i> Consultar productos por WhatsApp</a>
       </div>
       <div class="reveal-r grid grid-cols-2 gap-4">
-        <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=600&q=80" class="w-full h-72 object-cover mt-8" alt="Curso">
-        <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=600&q=80" class="w-full h-72 object-cover" alt="Clase">
+        <div class="img-ph w-full h-56 flex flex-col items-center justify-center gap-3 border border-rosegold/15">
+          <i data-lucide="droplets" class="w-8 h-8 text-rosegold/60"></i>
+          <p class="font-display text-sm text-ink/50 text-center px-4">Shampoos &amp;<br>Acondicionadores</p>
+        </div>
+        <div class="img-ph w-full h-56 flex flex-col items-center justify-center gap-3 border border-rosegold/15 mt-8">
+          <i data-lucide="sparkles" class="w-8 h-8 text-rosegold/60"></i>
+          <p class="font-display text-sm text-ink/50 text-center px-4">Tratamientos<br>de Brillo</p>
+        </div>
+        <div class="img-ph w-full h-56 flex flex-col items-center justify-center gap-3 border border-rosegold/15">
+          <i data-lucide="leaf" class="w-8 h-8 text-rosegold/60"></i>
+          <p class="font-display text-sm text-ink/50 text-center px-4">Mascarillas<br>Nutritivas</p>
+        </div>
+        <div class="img-ph w-full h-56 flex flex-col items-center justify-center gap-3 border border-rosegold/15">
+          <i data-lucide="shield-check" class="w-8 h-8 text-rosegold/60"></i>
+          <p class="font-display text-sm text-ink/50 text-center px-4">Protectores<br>Térmicos</p>
+        </div>
       </div>
     </div>
   </div>
@@ -368,7 +574,7 @@ window.scrollTo(0,0);
             <div class="w-11 h-11 rounded-full bg-ivory/10 flex items-center justify-center shrink-0"><i data-lucide="phone" class="w-5 h-5 text-rosegold"></i></div>
             <div><p class="font-medium mb-1">Teléfono</p><p class="text-ivory/65 text-sm font-light">55 6656 8134</p></div>
           </div>
-          <a href="https://wa.me/525566568134" target="_blank" class="inline-flex items-center gap-3 bg-[#25D366] text-white px-8 py-4 text-[.72rem] tracking-wides uppercase hover:opacity-90 transition-opacity"><i data-lucide="message-circle" class="w-4 h-4"></i> Escríbenos por WhatsApp</a>
+          <a href="https://wa.me/525566568134?text=Hola%2C+me+interesa+agendar+una+cita+en+el+estudio" target="_blank" class="inline-flex items-center gap-3 bg-[#25D366] text-white px-8 py-4 text-[.72rem] tracking-wides uppercase hover:opacity-90 transition-opacity"><i data-lucide="message-circle" class="w-4 h-4"></i> Escríbenos por WhatsApp</a>
         </div>
         <div class="mt-10 overflow-hidden border border-ivory/10">
           <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-98.85%2C19.55%2C-98.80%2C19.60&amp;layer=mapnik&amp;marker=19.575,-98.825" class="w-full h-56 grayscale opacity-90" loading="lazy"></iframe>
@@ -411,6 +617,14 @@ window.scrollTo(0,0);
   <div class="max-w-7xl mx-auto px-6 lg:px-10 py-14">
     <div class="flex flex-col md:flex-row items-center justify-between gap-8">
       <a href="#hero" class="font-display text-2xl text-ivory">Laura <span class="text-rosegold italic">Zapien</span></a>
+      <div class="hidden md:flex items-center gap-6 text-[.72rem] tracking-wide text-ivory/50">
+        <a href="#services" class="hover:text-ivory transition-colors">Servicios</a>
+        <a href="#cabello" class="hover:text-ivory transition-colors">Cabello</a>
+        <a href="#belleza" class="hover:text-ivory transition-colors">Belleza</a>
+        <a href="#courses" class="hover:text-ivory transition-colors">Cursos</a>
+        <a href="#productos" class="hover:text-ivory transition-colors">Productos</a>
+        <a href="#contact" class="hover:text-ivory transition-colors">Contacto</a>
+      </div>
       <div class="flex items-center gap-5">
         <a href="https://instagram.com/laurazapienoficial" target="_blank" class="w-10 h-10 rounded-full border border-ivory/20 flex items-center justify-center text-ivory hover:bg-rosegold hover:border-rosegold transition-colors"><i data-lucide="instagram" class="w-[18px] h-[18px]"></i></a>
         <a href="https://www.facebook.com/LauraZapienOficial/" target="_blank" class="w-10 h-10 rounded-full border border-ivory/20 flex items-center justify-center text-ivory hover:bg-rosegold hover:border-rosegold transition-colors"><i data-lucide="facebook" class="w-[18px] h-[18px]"></i></a>
@@ -430,25 +644,54 @@ window.scrollTo(0,0);
 
 <script>
 /* ---------- DATA ---------- */
-const services = [
-  {icon:'palette', title:'Hair Color', desc:'Color a medida con técnicas que cuidan y realzan tu cabello.'},
-  {icon:'sun', title:'Balayage', desc:'Iluminaciones naturales con dimensión y movimiento.'},
-  {icon:'shield-check', title:'Corrección de color', desc:'Recuperamos y reequilibramos el color con precisión técnica.'},
-  {icon:'scissors', title:'Cortes', desc:'Cortes pensados para tu rostro, estilo y personalidad.'},
-  {icon:'wand-2', title:'Hair Makeover', desc:'Una transformación integral de imagen de principio a fin.'},
-  {icon:'flower-2', title:'Peinados', desc:'Peinados para eventos especiales y ocasiones únicas.'},
-  {icon:'brush', title:'Maquillaje profesional', desc:'Maquillaje impecable para fotografía, eventos y pasarela.'},
-  {icon:'gem', title:'Novias', desc:'Belleza nupcial integral para el día más importante.'},
-  {icon:'eye', title:'Diseño de cejas', desc:'Diseño y perfilado que enmarca y armoniza tu mirada.'},
-  {icon:'graduation-cap', title:'Cursos presenciales', desc:'Formación práctica para estilistas profesionales.'},
-  {icon:'sparkles', title:'Asesoría personalizada', desc:'Diagnóstico y plan de imagen hecho solo para ti.'},
+const WA = 'https://wa.me/525566568134?text=Hola%2C+';
+
+const svcCabello = [
+  {icon:'scissors', title:'Cortes', desc:'Cortes personalizados para tu tipo de rostro, textura de cabello y estilo de vida.', img:'https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+corte+de+cabello'},
+  {icon:'sun', title:'Color', desc:'Desde raíces hasta balayage y corrección de color. Colorimetría experta con productos premium.', img:'images/work-4.jpg', wa:'me+interesa+agendar+un+servicio+de+color+de+cabello'},
+  {icon:'wind', title:'Alaciados Progresivos', desc:'Tratamiento alisador que elimina el frizz y da brillo duradero, cuidando la salud del cabello.', img:'images/work-6.jpg', wa:'me+interesa+agendar+un+servicio+de+alisado+progresivo'},
+  {icon:'droplets', title:'Rizos', desc:'Definición y cuidado de rizos naturales con técnicas especializadas para cada tipo de curl.', img:'images/work-1.jpg', wa:'me+interesa+agendar+un+servicio+de+rizos'},
+  {icon:'flower-2', title:'Peinados Frontales', desc:'Peinados de acabado para eventos, ceremonias y ocasiones especiales con técnica impecable.', img:'https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+peinado+frontal'},
+  {icon:'shield-check', title:'Tratamientos Capilares', desc:'Hidratación profunda, keratina y nutrición para restaurar la salud y el brillo de tu cabello.', img:'images/work-5.jpg', wa:'me+interesa+agendar+un+tratamiento+capilar'},
 ];
+
+const svcBelleza = [
+  {icon:'brush', title:'Maquillaje', desc:'Maquillaje profesional para fotografía, eventos sociales y sesiones editoriales.', img:'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+maquillaje'},
+  {icon:'heart', title:'Novias Sociales', desc:'Looks nupciales duraderos e impecables para el día más importante de tu vida.', img:'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+informaci%C3%B3n+sobre+maquillaje+para+novia'},
+  {icon:'gem', title:'Quinceañeras', desc:'Transformación completa para quinceañeras: peinado, maquillaje y estilismo integral.', img:'images/event-quince-2.jpg', wa:'me+interesa+informaci%C3%B3n+sobre+servicios+para+quincea%C3%B1era'},
+  {icon:'eye', title:'Lash Lifting', desc:'Elevación y curvado de pestañas naturales que abre la mirada sin extensiones.', img:'images/work-7-brows.jpg', wa:'me+interesa+agendar+un+servicio+de+lash+lifting'},
+  {icon:'palette', title:'Pigmentación de Cejas', desc:'Define y da forma a tus cejas con pigmentación duradera y aspecto natural.', img:'images/work-7-brows.jpg', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+cejas'},
+  {icon:'sparkles', title:'Pigmentación de Ojos', desc:'Delineado permanente que realza y enmarca tu mirada con precisión artística.', img:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+ojos'},
+];
+
+const svcCuidado = [
+  {icon:'smile', title:'Pigmentación de Labios', desc:'Color y definición duraderos para tus labios, con resultados naturales y elegantes.', img:'https://images.unsplash.com/photo-1586495777744-4e6232bf4bdf?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+labios'},
+  {icon:'star', title:'Uñas', desc:'Manicure, semipermanente y nail art con acabados de calidad salón.', img:'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+u%C3%B1as'},
+  {icon:'feather', title:'Depilaciones con Cera', desc:'Depilación profesional con cera para resultados suaves y duraderos.', img:'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+depilaci%C3%B3n'},
+  {icon:'droplet', title:'Pedicure', desc:'Cuidado completo de pies con tratamiento hidratante y acabado perfecto.', img:'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+agendar+un+servicio+de+pedicure'},
+  {icon:'shopping-bag', title:'Venta de Producto', desc:'Productos profesionales para mantener tus resultados en casa.', img:'https://images.unsplash.com/photo-1522338242992-e1a54906a8da?auto=format&fit=crop&w=600&q=80', wa:'me+interesa+consultar+productos+disponibles'},
+];
+
+const pigments = [
+  {icon:'palette', title:'Cejas', desc:'Microblading y sombreado de cejas que enmarcan tu rostro de forma natural y duradera.', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+cejas'},
+  {icon:'eye', title:'Ojos', desc:'Delineado superior e inferior permanente para una mirada definida sin esfuerzo diario.', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+ojos'},
+  {icon:'smile', title:'Labios', desc:'Contorno y relleno de labios con pigmentación semipermanente de aspecto natural.', wa:'me+interesa+informaci%C3%B3n+sobre+pigmentaci%C3%B3n+de+labios'},
+];
+
+const cuidadoItems = [
+  {icon:'star', title:'Uñas', desc:'Manicure y nail art profesional', wa:'me+interesa+agendar+un+servicio+de+u%C3%B1as'},
+  {icon:'droplet', title:'Pedicure', desc:'Cuidado completo de pies', wa:'me+interesa+agendar+un+servicio+de+pedicure'},
+  {icon:'feather', title:'Depilaciones', desc:'Con cera, suave y duradera', wa:'me+interesa+agendar+un+servicio+de+depilaci%C3%B3n'},
+  {icon:'eye', title:'Lash Lifting', desc:'Curvado natural de pestañas', wa:'me+interesa+agendar+un+servicio+de+lash+lifting'},
+];
+
 const gallery = [
   'images/work-1.jpg','images/work-2.jpg','images/work-3.jpg',
   'images/work-4.jpg','images/work-5.jpg','images/work-6.jpg',
   'images/work-7-brows.jpg','images/event-quince-2.jpg',
   'images/client-closeup.jpg'
 ];
+
 const timeline = [
   {n:'01', icon:'calendar-check', t:'Agenda', d:'Reserva tu cita y cuéntanos qué buscas lograr.'},
   {n:'02', icon:'search', t:'Diagnóstico', d:'Analizamos tu cabello, tono de piel y estilo de vida.'},
@@ -456,50 +699,141 @@ const timeline = [
   {n:'04', icon:'sparkles', t:'Transformación', d:'Ejecutamos la técnica con precisión y cuidado.'},
   {n:'05', icon:'star', t:'Resultado final', d:'Reveles tu mejor versión, lista para brillar.'},
 ];
+
 const testimonials = [
   {name:'Mariana G.', img:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80', text:'Laura entendió exactamente lo que quería sin que yo supiera explicarlo. Salí del estudio sintiéndome otra persona, en el mejor de los sentidos.'},
   {name:'Sofía R.', img:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=80', text:'El nivel de detalle y profesionalismo es altísimo. Mi corrección de color quedó impecable después de un desastre en otro salón.'},
   {name:'Valeria M.', img:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80', text:'Me maquilló para mi boda y todas mis fotos quedaron espectaculares. Duró perfecto todo el día. La recomiendo con los ojos cerrados.'},
 ];
+
 const faqs = [
   {q:'¿Trabajas con cita?', a:'Sí. Para garantizar una atención dedicada y sin prisas, atendemos exclusivamente bajo cita previa. Puedes reservar por WhatsApp o el formulario de contacto.'},
   {q:'¿Realizas cambios de color?', a:'Por supuesto. La colorimetría es una de las especialidades de Laura, incluyendo balayage, iluminaciones, cambios totales y correcciones de color.'},
-  {q:'¿Ofreces maquillaje para eventos?', a:'Sí. Realizamos maquillaje profesional para novias, eventos, sesiones fotográficas y ocasiones especiales.'},
-  {q:'¿Impartes cursos?', a:'Así es. Laura imparte cursos presenciales dirigidos a estilistas que desean profesionalizar y elevar su técnica.'},
+  {q:'¿Ofreces maquillaje para eventos?', a:'Sí. Realizamos maquillaje profesional para novias, quinceañeras, eventos, sesiones fotográficas y ocasiones especiales.'},
+  {q:'¿Impartes cursos?', a:'Así es. Laura imparte cursos de Alisado Progresivo y Lash Lifting en modalidad PDF, online y presencial.'},
+  {q:'¿Vendes productos profesionales?', a:'Sí. En el estudio encontrarás productos de cabello y belleza recomendados por Laura para mantener tus resultados. Escríbenos por WhatsApp para consultar disponibilidad.'},
   {q:'¿Dónde te encuentras?', a:'El estudio está ubicado en Calle Independencia #23, Papalotla, Estado de México. Te compartimos la ubicación exacta al confirmar tu cita.'},
 ];
 
-/* ---------- RENDER ---------- */
-const svc = document.getElementById('svc-grid');
-services.forEach((s,i)=>{
-  svc.insertAdjacentHTML('beforeend', `
-    <div class="svc-card group flex md:block items-baseline md:items-start gap-4 border-b border-ink/10 md:border md:border-rosegold/15 bg-transparent md:bg-ivory py-4 md:py-8 px-1 md:px-8">
-      <span class="svc-num font-display text-xs text-copper/50 shrink-0 md:hidden">${String(i+1).padStart(2,'0')}</span>
-      <div class="hidden md:flex svc-ic w-14 h-14 rounded-full bg-sand items-center justify-center mb-6 text-copper"><i data-lucide="${s.icon}" class="w-6 h-6"></i></div>
-      <div class="svc-text">
-        <h3 class="font-display text-lg md:text-2xl mb-0.5 md:mb-3">${s.title}</h3>
-        <p class="text-ink/55 text-[.82rem] md:text-sm font-light leading-snug md:leading-relaxed">${s.desc}</p>
+const cursosAl = [
+  {mod:'PDF', icon:'file-text', include:'Manual completo en PDF con técnicas, tiempos y productos recomendados.', ideal:'Estilistas que prefieren aprender a su propio ritmo desde casa.', cta:'Comprar+curso+de+alisado+progresivo+modalidad+PDF'},
+  {mod:'Online', icon:'video', include:'Manual PDF + videollamadas en vivo con Laura para resolver dudas en tiempo real.', ideal:'Profesionales con experiencia previa que buscan perfeccionar su técnica.', cta:'Comprar+curso+de+alisado+progresivo+modalidad+online'},
+  {mod:'Presencial', icon:'users', include:'Capacitación práctica en el estudio con modelos reales. Incluye material y constancia.', ideal:'Estilistas que quieren aprendizaje directo con retroalimentación inmediata.', cta:'Solicitar+informaci%C3%B3n+sobre+curso+presencial+de+alisado+progresivo'},
+];
+
+const cursosLash = [
+  {mod:'PDF', icon:'file-text', include:'Manual completo en PDF con el paso a paso del lash lifting, productos y cuidados.', ideal:'Ideal para quien inicia y quiere estudiar desde casa.', cta:'Comprar+curso+de+lash+lifting+modalidad+PDF'},
+  {mod:'Online', icon:'video', include:'Manual PDF + videollamadas con Laura. Resolución de dudas y seguimiento personalizado.', ideal:'Para quienes ya conocen el procedimiento y quieren profundizar.', cta:'Comprar+curso+de+lash+lifting+modalidad+online'},
+  {mod:'Presencial', icon:'users', include:'Práctica en el estudio con modelos reales, materiales incluidos y constancia de curso.', ideal:'El mejor camino para dominar la técnica con seguridad y confianza.', cta:'Solicitar+informaci%C3%B3n+sobre+curso+presencial+de+lash+lifting'},
+];
+
+/* ---------- HELPERS ---------- */
+function svcVisCard(s){
+  return `<div class="svc-vis bg-ivory border border-rosegold/10 overflow-hidden group cursor-default">
+    <div class="relative overflow-hidden h-52">
+      ${s.img
+        ? `<img src="${s.img}" class="svc-vis-img w-full h-full object-cover" alt="${s.title}">`
+        : `<div class="img-ph w-full h-full flex items-center justify-center"><i data-lucide="${s.icon}" class="w-10 h-10 text-rosegold/40"></i></div>`}
+      <div class="svc-vis-overlay absolute inset-0 bg-ink/40 flex items-center justify-center">
+        <a href="${WA}${s.wa}" target="_blank" class="bg-ivory text-ink text-[.65rem] tracking-wides uppercase px-5 py-2 hover:bg-champagne transition-colors">Agendar</a>
       </div>
+    </div>
+    <div class="p-6">
+      <div class="flex items-center gap-3 mb-2">
+        <i data-lucide="${s.icon}" class="w-4 h-4 text-rosegold shrink-0"></i>
+        <h3 class="font-display text-lg">${s.title}</h3>
+      </div>
+      <p class="text-ink/55 text-[.82rem] font-light leading-relaxed mb-4">${s.desc}</p>
+      <a href="${WA}${s.wa}" target="_blank" class="inline-flex items-center gap-2 text-[.65rem] tracking-wides uppercase text-copper hover:text-rosegold transition-colors"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i>Agendar por WhatsApp</a>
+    </div>
+  </div>`;
+}
+
+function courseCard(c, courseLabel){
+  const icon = c.mod==='PDF'?'file-text': c.mod==='Online'?'video':'users';
+  return `<div class="course-card p-7 flex flex-col gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full border border-rosegold/30 flex items-center justify-center shrink-0">
+        <i data-lucide="${icon}" class="w-4 h-4 text-rosegold"></i>
+      </div>
+      <div>
+        <p class="text-[.65rem] tracking-wides uppercase text-ivory/40">${courseLabel}</p>
+        <p class="font-display text-xl text-ivory">Modalidad ${c.mod}</p>
+      </div>
+    </div>
+    <div class="h-px bg-rosegold/15"></div>
+    <div>
+      <p class="text-[.65rem] tracking-wides uppercase text-ivory/40 mb-1">Incluye</p>
+      <p class="text-ivory/75 text-sm font-light leading-relaxed">${c.include}</p>
+    </div>
+    <div>
+      <p class="text-[.65rem] tracking-wides uppercase text-ivory/40 mb-1">Ideal para</p>
+      <p class="text-ivory/75 text-sm font-light leading-relaxed">${c.ideal}</p>
+    </div>
+    <div class="mt-auto pt-2">
+      <a href="${WA}${c.cta}" target="_blank" class="inline-flex items-center gap-2 bg-rosegold/20 border border-rosegold/30 text-ivory text-[.65rem] tracking-wides uppercase px-5 py-3 hover:bg-rosegold/40 transition-colors w-full justify-center"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i>Pedir información</a>
+    </div>
+  </div>`;
+}
+
+/* ---------- RENDER ---------- */
+// Services by category
+const scEl = document.getElementById('svc-cabello');
+svcCabello.forEach(s => scEl.insertAdjacentHTML('beforeend', svcVisCard(s)));
+
+const sbEl = document.getElementById('svc-belleza-grid');
+svcBelleza.forEach(s => sbEl.insertAdjacentHTML('beforeend', svcVisCard(s)));
+
+const scuEl = document.getElementById('svc-cuidado');
+svcCuidado.forEach(s => scuEl.insertAdjacentHTML('beforeend', svcVisCard(s)));
+
+// Pigments
+const pgEl = document.getElementById('pigment-grid');
+pigments.forEach(p => {
+  pgEl.insertAdjacentHTML('beforeend', `
+    <div class="text-center border border-rosegold/15 bg-ivory p-8">
+      <div class="w-14 h-14 rounded-full bg-sand flex items-center justify-center mx-auto mb-4">
+        <i data-lucide="${p.icon}" class="w-6 h-6 text-rosegold"></i>
+      </div>
+      <h4 class="font-display text-xl mb-3">${p.title}</h4>
+      <p class="text-ink/60 text-sm font-light leading-relaxed mb-5">${p.desc}</p>
+      <a href="${WA}${p.wa}" target="_blank" class="inline-flex items-center gap-2 text-[.65rem] tracking-wides uppercase text-copper hover:text-rosegold transition-colors"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i>Consultar</a>
     </div>`);
 });
 
+// Cuidado compact
+const cgEl = document.getElementById('cuidado-grid');
+cuidadoItems.forEach(c => {
+  cgEl.insertAdjacentHTML('beforeend', `
+    <div class="border border-rosegold/12 bg-sand/60 p-6 flex flex-col gap-3">
+      <div class="w-10 h-10 rounded-full bg-ivory flex items-center justify-center">
+        <i data-lucide="${c.icon}" class="w-4 h-4 text-rosegold"></i>
+      </div>
+      <h4 class="font-display text-lg">${c.title}</h4>
+      <p class="text-ink/55 text-sm font-light">${c.desc}</p>
+      <a href="${WA}${c.wa}" target="_blank" class="mt-auto inline-flex items-center gap-2 text-[.65rem] tracking-wides uppercase text-copper hover:text-rosegold transition-colors"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i>Agendar</a>
+    </div>`);
+});
+
+// Gallery
 const gal = document.getElementById('gallery-grid');
 gallery.forEach((id,i)=>{
-  const h = [340,440,380,420,360,460,400,380,430][i%9];
-  gal.insertAdjacentHTML('beforeend', `
+  const h=[340,440,380,420,360,460,400,380,430][i%9];
+  gal.insertAdjacentHTML('beforeend',`
     <div class="tile gtile" onclick="openLB('${id}')">
       <img src="${id}" style="--th:${h}px" alt="Trabajo">
     </div>`);
 });
 
+// Timeline
 const tl = document.getElementById('timeline');
 timeline.forEach((s,i)=>{
-  const left = i%2===0;
-  tl.insertAdjacentHTML('beforeend', `
+  const left=i%2===0;
+  tl.insertAdjacentHTML('beforeend',`
     <div class="relative flex md:items-center reveal ${left?'md:flex-row':'md:flex-row-reverse'}">
       <div class="hidden md:block md:w-1/2 ${left?'md:pr-16 md:text-right':'md:pl-16'}">
         <p class="font-display text-3xl mb-2">${s.t}</p>
-        <p class="text-ink/55 text-sm font-light ${left?'md:ml-auto':''} max-w-xs ${left?'ml-auto':''}">${s.d}</p>
+        <p class="text-ink/55 text-sm font-light max-w-xs ${left?'ml-auto':''}">${s.d}</p>
       </div>
       <div class="absolute left-[27px] md:left-1/2 md:-translate-x-1/2 w-14 h-14 rounded-full bg-ivory border-2 border-rosegold flex items-center justify-center z-10 shrink-0">
         <i data-lucide="${s.icon}" class="w-5 h-5 text-copper"></i>
@@ -512,9 +846,17 @@ timeline.forEach((s,i)=>{
     </div>`);
 });
 
+// Courses
+const caEl = document.getElementById('curso-alisado');
+cursosAl.forEach(c => caEl.insertAdjacentHTML('beforeend', courseCard(c, 'Alisado Progresivo')));
+
+const clEl = document.getElementById('curso-lash');
+cursosLash.forEach(c => clEl.insertAdjacentHTML('beforeend', courseCard(c, 'Lash Lifting')));
+
+// Testimonials
 const tt = document.getElementById('t-track');
 testimonials.forEach(t=>{
-  tt.insertAdjacentHTML('beforeend', `
+  tt.insertAdjacentHTML('beforeend',`
     <div class="min-w-full px-4">
       <div class="bg-ivory border border-rosegold/15 p-10 md:p-14 text-center max-w-3xl mx-auto card-lift">
         <img src="${t.img}" class="w-20 h-20 rounded-full object-cover mx-auto mb-6" alt="${t.name}">
@@ -525,9 +867,10 @@ testimonials.forEach(t=>{
     </div>`);
 });
 
+// FAQ
 const fq = document.getElementById('faq');
 faqs.forEach(f=>{
-  fq.insertAdjacentHTML('beforeend', `
+  fq.insertAdjacentHTML('beforeend',`
     <div class="faq-item border border-rosegold/15 bg-ivory">
       <button class="faq-q w-full flex items-center justify-between gap-4 text-left px-6 py-5">
         <span class="font-medium text-ink">${f.q}</span>
@@ -540,6 +883,13 @@ faqs.forEach(f=>{
 lucide.createIcons();
 
 /* ---------- INTERACTIONS ---------- */
+// Mobile menu
+function closeMob(){ document.getElementById('mob-menu').classList.remove('open'); document.getElementById('mob-backdrop').classList.add('hidden'); }
+document.getElementById('mob-toggle').addEventListener('click',()=>{
+  document.getElementById('mob-menu').classList.toggle('open');
+  document.getElementById('mob-backdrop').classList.toggle('hidden');
+});
+
 // FAQ
 document.querySelectorAll('.faq-q').forEach(b=>{
   b.addEventListener('click',()=>{
@@ -552,15 +902,13 @@ document.querySelectorAll('.faq-q').forEach(b=>{
 // Lightbox
 const lb=document.getElementById('lightbox'), lbImg=document.getElementById('lb-img');
 document.getElementById('cf-submit').addEventListener('click',()=>{
-  document.getElementById('cf-card').classList.add('cf-sent');
-  lucide.createIcons();
+  document.getElementById('cf-card').classList.add('cf-sent'); lucide.createIcons();
 });
 
 function openLB(src){ lbImg.src=src; lb.classList.remove('hidden'); lb.classList.add('flex'); requestAnimationFrame(()=>lb.classList.add('is-open')); }
 function closeLB(){ lb.classList.remove('is-open'); setTimeout(()=>{ lb.classList.add('hidden'); lb.classList.remove('flex'); }, reduceMotion?0:350); }
 document.getElementById('lb-close').addEventListener('click',closeLB);
 lb.addEventListener('click',e=>{ if(e.target===lb) closeLB(); });
-lb.addEventListener('click',e=>{ if(e.target===lb){ lb.classList.add('hidden'); lb.classList.remove('flex'); }});
 
 // Testimonials slider
 let ti=0; const total=testimonials.length;
@@ -574,16 +922,12 @@ dots.querySelectorAll('.t-dot').forEach(d=>d.addEventListener('click',()=>setT(+
 setT(0);
 setInterval(()=>setT(ti+1),6000);
 
-// Before/After
+// Before/After slider
 (function(){
   const wrap=document.getElementById('ba'), after=wrap.querySelector('.ba-after'),
         handle=document.getElementById('ba-handle'), beforeImg=document.getElementById('ba-before-img');
   let dragging=false;
-  function setPos(x){
-    const r=wrap.getBoundingClientRect();
-    let p=((x-r.left)/r.width)*100; p=Math.max(0,Math.min(100,p));
-    after.style.width=p+'%'; handle.style.left=p+'%'; beforeImg.style.width=r.width+'px';
-  }
+  function setPos(x){ const r=wrap.getBoundingClientRect(); let p=((x-r.left)/r.width)*100; p=Math.max(0,Math.min(100,p)); after.style.width=p+'%'; handle.style.left=p+'%'; beforeImg.style.width=r.width+'px'; }
   const start=()=>dragging=true; const end=()=>dragging=false;
   const move=e=>{ if(!dragging) return; const x=e.touches?e.touches[0].clientX:e.clientX; setPos(x); };
   handle.addEventListener('mousedown',start); window.addEventListener('mouseup',end); window.addEventListener('mousemove',move);
@@ -599,36 +943,30 @@ window.addEventListener('scroll',()=>{
   document.getElementById('progress').style.width=p+'%';
 });
 
-/* ---------- GSAP ANIMATIONS ---------- */
+/* ---------- GSAP ---------- */
 gsap.registerPlugin(ScrollTrigger);
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 if(reduceMotion){
-  // skip all choreography: reveal targets just need to be visible
   gsap.set('.hero-el, .reveal, .reveal-l, .reveal-r, .gtile',{opacity:1,y:0,x:0,filter:'none'});
 } else {
+  gsap.set('.hero-el',{opacity:0,y:40,filter:'blur(8px)'});
+  gsap.to('.hero-el',{opacity:1,y:0,filter:'blur(0px)',duration:1.2,stagger:.15,ease:'power3.out',delay:.2});
+  gsap.to('.hero-img',{scale:1,duration:2.4,ease:'power2.out'});
+  gsap.to('.hero-img',{yPercent:18,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
 
-// hero load
-gsap.set('.hero-el',{opacity:0,y:40,filter:'blur(8px)'});
-gsap.to('.hero-el',{opacity:1,y:0,filter:'blur(0px)',duration:1.2,stagger:.15,ease:'power3.out',delay:.2});
-gsap.to('.hero-img',{scale:1,duration:2.4,ease:'power2.out'});
-// parallax hero
-gsap.to('.hero-img',{yPercent:18,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+  function batch(sel,vars){
+    gsap.utils.toArray(sel).forEach(el=>{
+      gsap.fromTo(el,vars.from,{...vars.to,scrollTrigger:{trigger:el,start:'top 86%'}});
+    });
+  }
+  batch('.reveal',{from:{opacity:0,y:40},to:{opacity:1,y:0,duration:1,ease:'power3.out'}});
+  batch('.reveal-l',{from:{opacity:0,x:-50},to:{opacity:1,x:0,duration:1.1,ease:'power3.out'}});
+  batch('.reveal-r',{from:{opacity:0,x:50},to:{opacity:1,x:0,duration:1.1,ease:'power3.out'}});
 
-function batch(sel,vars){
-  gsap.utils.toArray(sel).forEach(el=>{
-    gsap.fromTo(el, vars.from, {...vars.to, scrollTrigger:{trigger:el,start:'top 86%'}});
+  gsap.utils.toArray('.gtile').forEach((el,i)=>{
+    gsap.fromTo(el,{opacity:0,y:30},{opacity:1,y:0,duration:.7,delay:(i%4)*.08,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 92%'}});
   });
-}
-batch('.reveal',{from:{opacity:0,y:40},to:{opacity:1,y:0,duration:1,ease:'power3.out'}});
-batch('.reveal-l',{from:{opacity:0,x:-50},to:{opacity:1,x:0,duration:1.1,ease:'power3.out'}});
-batch('.reveal-r',{from:{opacity:0,x:50},to:{opacity:1,x:0,duration:1.1,ease:'power3.out'}});
-
-// gallery tiles: individual staggered entrance instead of one block fade
-gsap.utils.toArray('.gtile').forEach((el,i)=>{
-  gsap.fromTo(el,{opacity:0,y:30},{opacity:1,y:0,duration:.7,delay:(i%4)*.08,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 92%'}});
-});
-
 }
 
 // counters
